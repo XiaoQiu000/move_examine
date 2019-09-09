@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     protected void loadData() {
         String account = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT);
         String password = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD);
-        if (TextUtils.isEmpty(account) && TextUtils.isEmpty(password)) {
+        if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(password)) {
             et_account.setText(account);
             et_password.setText(password);
         }
@@ -77,7 +77,8 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_login:
-                toLogin();
+//                toLogin();
+                startActivity(new Intent(mContext, MainActivity.class));
                 break;
             default:
                 break;

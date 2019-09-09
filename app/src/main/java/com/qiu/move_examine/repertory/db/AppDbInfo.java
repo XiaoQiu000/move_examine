@@ -5,12 +5,11 @@ import android.support.annotation.NonNull;
 
 import com.qiu.move_examine.repertory.db.bean.JsonBeanInfo;
 import com.qiu.move_examine.repertory.db.bean.NoticeInfo;
-import com.qiu.move_examine.repertory.db.bean.UserAccountBean;
 import com.satsoftec.frame.repertory.dbTool.DatabaseInfo;
 
 
 /**
- * @author liuyixian
+ * @author Mr.Qiu
  * @date 16/1/10
  */
 public class AppDbInfo extends DatabaseInfo {
@@ -23,14 +22,13 @@ public class AppDbInfo extends DatabaseInfo {
 
     @Override
     public int getDbVersion() {
-        return 11;
+        return 1;
     }
 
     @Override
     public Class<?>[] getBeanClass() {
         return new Class<?>[]{
                 JsonBeanInfo.class,
-                UserAccountBean.class,
                 NoticeInfo.class,
         };
     }
