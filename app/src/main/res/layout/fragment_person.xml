@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background3"
     android:orientation="vertical"
     tools:context=".presenter.fragment.MessageFragment">
 
@@ -28,4 +29,31 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="170dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:src="@mipmap/person_head" />
+
+    <TextView
+        android:id="@+id/tv_inspectionUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="青岛市公安分局"
+        android:textColor="@color/text0"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_perName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="林警官"
+        android:textColor="@color/text0"
+        android:textSize="18sp" />
 </LinearLayout>

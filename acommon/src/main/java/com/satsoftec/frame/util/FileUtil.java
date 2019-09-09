@@ -25,6 +25,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * @author Mr.Qiu
+ */
 public class FileUtil {
     public static byte[] file2bytes(File file) {
         byte[] ret = null;
@@ -322,10 +325,12 @@ public class FileUtil {
             while ((len = fis.read(buf)) > 0) {
                 fos.write(buf, 0, len);
             }
-            if (fis != null)
+            if (fis != null) {
                 fis.close();
-            if (fos != null)
+            }
+            if (fos != null) {
                 fos.close();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -347,8 +352,6 @@ public class FileUtil {
                 if ("primary".equalsIgnoreCase(type)) {
                     return Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
-
-                // TODO handle non-primary volumes
             }
             // DownloadsProvider
             else if (isDownloadsDocument(uri)) {
@@ -417,8 +420,9 @@ public class FileUtil {
                 return cursor.getString(column_index);
             }
         } finally {
-            if (cursor != null)
+            if (cursor != null) {
                 cursor.close();
+            }
         }
         return null;
     }
@@ -452,7 +456,6 @@ public class FileUtil {
      *
      * @param file
      * @return
-     * @throws Exception
      */
     public static long getFileSize(File file) {
         long size = 0;
