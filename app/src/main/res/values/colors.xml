@@ -8,6 +8,8 @@
     <!--常用背景颜色-->
     <color name="background">#f2f2f2</color><!--背景基本色调-->
     <color name="background2">#00cbd8</color><!--背景基本色调-->
+    <color name="background3">#191b24</color><!--背景基本色调-->
+    <color name="background4">#272a34</color><!--背景基本色调-->
     <!--常用文本颜色-->
     <color name="text0">#ffffff</color>
     <color name="text1">#232323</color>
@@ -18,6 +20,6 @@
     <color name="text6">#cccccc</color>
     <color name="text7">#1f4ba5</color>
     <color name="text8">#e23a3c</color>
-    <color name="text9">#3a93f9</color>
+    <color name="text9">#00cbd8</color>
     <color name="translate">#00000000</color>
 </resources>

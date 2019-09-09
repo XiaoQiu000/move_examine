@@ -1,18 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     tools:context=".presenter.activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RadioGroup
+        android:id="@+id/main_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/translate"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-</android.support.constraint.ConstraintLayout>
+        <com.qiu.move_examine.common.view.GetTouchRelativeLayout
+            android:id="@+id/message_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/message_rb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:checked="true"
+                android:drawableTop="@drawable/rb_message"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:text="我的消息"
+                android:textColor="@drawable/textchane" />
+
+            <RelativeLayout
+                android:id="@+id/unread_layout"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="53dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_mark" />
+
+                <TextView
+                    android:id="@+id/unread_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="99"
+                    android:textColor="@color/text0"
+                    android:textSize="8sp" />
+            </RelativeLayout>
+        </com.qiu.move_examine.common.view.GetTouchRelativeLayout>
+
+        <com.qiu.move_examine.common.view.GetTouchRelativeLayout
+            android:id="@+id/target_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/target_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:button="@null"
+                android:drawableTop="@drawable/rb_target"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:text="目标库"
+                android:textColor="@drawable/textchane" />
+
+        </com.qiu.move_examine.common.view.GetTouchRelativeLayout>
+
+        <com.qiu.move_examine.common.view.GetTouchRelativeLayout
+            android:id="@+id/person_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/person_rb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:drawableTop="@drawable/rb_person"
+                android:gravity="center"
+                android:paddingTop="6dp"
+                android:text="我的"
+                android:textColor="@drawable/textchane" />
+        </com.qiu.move_examine.common.view.GetTouchRelativeLayout>
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_radiogroup"
+        android:background="@color/background3"></FrameLayout>
+
+</RelativeLayout>
