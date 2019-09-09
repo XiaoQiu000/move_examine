@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qiu.move_examine.R;
+import com.qiu.move_examine.common.utils.ActionBarUtils;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.util.CommonUtil;
 
@@ -73,6 +74,7 @@ public abstract class BaseActivity<T extends BaseExecuter> extends AppCompatActi
         content.addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         loadViewed = true;
+
         initView();
         loadData();
     }
@@ -185,6 +187,21 @@ public abstract class BaseActivity<T extends BaseExecuter> extends AppCompatActi
         }
     }
 
+    public void showTip(final String msg) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast toast = null;
+                if (toast == null) {
+                    toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+                } else {
+                    toast.cancel();
+                    toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+                }
+                toast.show();
+            }
+        });
+    }
 
     @Override
     protected void onDestroy() {
