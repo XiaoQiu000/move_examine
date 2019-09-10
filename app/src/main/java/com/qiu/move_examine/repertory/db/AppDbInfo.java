@@ -4,7 +4,7 @@ package com.qiu.move_examine.repertory.db;
 import android.support.annotation.NonNull;
 
 import com.qiu.move_examine.repertory.db.bean.JsonBeanInfo;
-import com.qiu.move_examine.repertory.db.bean.NoticeInfo;
+import com.qiu.move_examine.repertory.db.bean.MessageInfo;
 import com.satsoftec.frame.repertory.dbTool.DatabaseInfo;
 
 
@@ -29,7 +29,7 @@ public class AppDbInfo extends DatabaseInfo {
     public Class<?>[] getBeanClass() {
         return new Class<?>[]{
                 JsonBeanInfo.class,
-                NoticeInfo.class,
+                MessageInfo.class,
         };
     }
 

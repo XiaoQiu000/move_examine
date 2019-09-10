@@ -8,7 +8,7 @@ import com.satsoftec.frame.repertory.dbTool.Table;
  * @date 2017/10/12
  */
 @Table(name = "noticeInfo")
-public class NoticeInfo extends BaseEntity {
+public class MessageInfo extends BaseEntity {
     private Long ownerId;
     private Long noticeId;
     private String title;
