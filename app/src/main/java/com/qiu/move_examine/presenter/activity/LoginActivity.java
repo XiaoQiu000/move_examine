@@ -85,15 +85,17 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_login:
+                startActivity(new Intent(mContext, MainActivity.class));
+                finish();
 //                toLogin();
-                boolean isSet = SharedPreferenceUtil.getSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS);
-                if (isSet) {
-                    startActivity(new Intent(mContext, MainActivity.class));
-                    finish();
-                } else {
-                    // 调用 Handler 来异步设置别名
-                    mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, 1 + ""));
-                }
+//                boolean isSet = SharedPreferenceUtil.getSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS);
+//                if (isSet) {
+//                    startActivity(new Intent(mContext, MainActivity.class));
+//                    finish();
+//                } else {
+//                    // 调用 Handler 来异步设置别名
+//                    mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, 1 + ""));
+//                }
 
                 break;
             default:
