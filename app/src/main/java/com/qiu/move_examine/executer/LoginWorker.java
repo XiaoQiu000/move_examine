@@ -1,9 +1,8 @@
 package com.qiu.move_examine.executer;
 
-import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.contract.LoginContract;
-import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
+import com.qiu.move_examine.repertory.webservice.response.CommonResponse;
 import com.qiu.move_examine.repertory.webservice.service.LoginService;
 import com.satsoftec.frame.repertory.remote.WebServiceManage;
 import com.satsoftec.frame.repertory.remote.callback.SCallBack;
@@ -21,14 +20,10 @@ public class LoginWorker implements LoginContract.LoginExecute {
 
     @Override
     public void loginByAccount(final String account, final String password) {
-        WebServiceManage.getService(LoginService.class).userLoginByPhone(account, password).setCallback(new SCallBack<LoginResponse>() {
+        WebServiceManage.getService(LoginService.class).userLoginByPhone(account, password).setCallback(new SCallBack<CommonResponse>() {
             @Override
-            public void callback(boolean isok, String msg, LoginResponse res) {
-                if (isok && res != null) {
-                    SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT, account);
-                    SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD, password);
-                }
-                loginPresenter.loginResult(isok, msg, res);
+            public void callback(boolean isok, String msg, CommonResponse res) {
+                loginPresenter.loginResult(isok, res, account, password);
             }
         });
     }

@@ -1,7 +1,7 @@
 package com.qiu.move_examine.repertory.webservice.service;
 
 import com.qiu.move_examine.repertory.webservice.request.LoginRequest;
-import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
+import com.qiu.move_examine.repertory.webservice.response.CommonResponse;
 import com.satsoftec.frame.repertory.remote.BaseWebService;
 import com.satsoftec.frame.repertory.remote.WebTask;
 
@@ -18,10 +18,10 @@ public class LoginService extends BaseWebService {
      */
     public final static String USER_LOGIN_BY_ACCOUNT = "/mobileInventory/login/loginApp";
 
-    public WebTask<LoginResponse> userLoginByPhone(String account, String password) {
+    public WebTask<CommonResponse> userLoginByPhone(String account, String password) {
         LoginRequest request = new LoginRequest();
         request.setPerNo(account);
         request.setPerPwd(password);
-        return request(USER_LOGIN_BY_ACCOUNT, request, null, LoginResponse.class);
+        return request(USER_LOGIN_BY_ACCOUNT, request, null, CommonResponse.class);
     }
 }

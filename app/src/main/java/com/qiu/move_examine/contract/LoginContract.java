@@ -1,6 +1,6 @@
 package com.qiu.move_examine.contract;
 
-import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
+import com.qiu.move_examine.repertory.webservice.response.CommonResponse;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.presenter.BasePresenter;
 
@@ -21,11 +21,11 @@ public class LoginContract {
     public interface LoginPresenter extends BasePresenter<LoginExecute> {
         /**
          * 账号密码登录结果
-         *
-         * @param isok 是否成功
-         * @param msg  错误信息
+         *  @param isok 是否成功
          * @param res  返回数据
+         * @param account
+         * @param password
          */
-        void loginResult(boolean isok, String msg, LoginResponse res);
+        void loginResult(boolean isok, CommonResponse res, String account, String password);
     }
 }

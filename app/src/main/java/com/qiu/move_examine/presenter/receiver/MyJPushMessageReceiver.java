@@ -8,55 +8,64 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.presenter.activity.MainActivity;
 import com.satsoftec.frame.util.AndroidUtil;
+import com.satsoftec.frame.util.SharedPreferenceUtil;
 
 import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.JPushMessage;
+import cn.jpush.android.api.NotificationMessage;
 import cn.jpush.android.helper.Logger;
 import cn.jpush.android.service.JPushMessageReceiver;
 
 /**
  * @author Mr.Qiu
  */
-public class MyJPushMessageReceiver extends BroadcastReceiver {
+public class MyJPushMessageReceiver extends JPushMessageReceiver {
     private static final String TAG = "MyReceiver";
 
-    private NotificationManager nm;
+    @Override
+    public void onMessage(Context context, CustomMessage customMessage) {
+        super.onMessage(context, customMessage);
+        Log.e(TAG, "onMessage: 收到自定义消息" + customMessage);
+    }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        if (null == nm) {
-            nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        }
+    public void onNotifyMessageArrived(Context context, NotificationMessage notificationMessage) {
+        super.onNotifyMessageArrived(context, notificationMessage);
+        Log.e(TAG, "onNotifyMessageArrived: 收到通知消息" + notificationMessage);
 
-        Bundle bundle = intent.getExtras();
-        Logger.d(TAG, "onReceive - " + intent.getAction() + ", extras: " );
+    }
 
-        if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-            Logger.d(TAG, "JPush 用户注册成功");
 
-        } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-            Logger.d(TAG, "接受到推送下来的自定义消息");
-        } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-            Logger.d(TAG, "接受到推送下来的通知");
-            receivingNotification(context,bundle);
-        } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-            Logger.d(TAG, "用户点击打开了通知");
-        } else {
-            Logger.d(TAG, "Unhandled intent - " + intent.getAction());
+    @Override
+    public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
+        super.onAliasOperatorResult(context, jPushMessage);
+        switch (jPushMessage.getErrorCode()) {
+            case 0:
+                Log.e(TAG, "onAliasOperatorResult: 设置别名成功");
+                SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, true);
+                break;
+            case 6002:
+                Log.e(TAG, "onAliasOperatorResult: 设置别名失败");
+                SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, false);
+                break;
+            default:
+                Log.e(TAG, "onAliasOperatorResult: 设置别名失败");
+                SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, false);
+                break;
         }
     }
 
-    private void receivingNotification(Context context, Bundle bundle){
-        String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
-        Logger.d(TAG, " title : " + title);
-        String message = bundle.getString(JPushInterface.EXTRA_ALERT);
-        Logger.d(TAG, "message : " + message);
-        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-        Logger.d(TAG, "extras : " + extras);
+    @Override
+    public void onNotifyMessageOpened(Context context, NotificationMessage notificationMessage) {
+        super.onNotifyMessageOpened(context, notificationMessage);
+        Log.e(TAG, "onNotifyMessageOpened: 点击通知" );
     }
 }

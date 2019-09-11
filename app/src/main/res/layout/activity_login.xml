@@ -42,7 +42,7 @@
                 android:gravity="center"
                 android:hint="请输入账号"
                 android:inputType="number"
-                android:maxLength="11"
+                android:maxLength="20"
                 android:maxLines="1"
                 android:textColor="@color/text6"
                 android:textColorHint="@color/text3"

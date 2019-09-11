@@ -191,14 +191,7 @@ public abstract class BaseActivity<T extends BaseExecuter> extends AppCompatActi
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast toast = null;
-                if (toast == null) {
-                    toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-                } else {
-                    toast.cancel();
-                    toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-                }
-                toast.show();
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
