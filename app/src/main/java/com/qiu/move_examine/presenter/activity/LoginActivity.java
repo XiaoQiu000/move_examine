@@ -6,16 +6,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.ClientConstant;
@@ -27,11 +30,16 @@ import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
 
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
+
 /**
  * @author Mr.Qiu
  */
 public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> implements LoginContract.LoginPresenter, View.OnFocusChangeListener, View.OnClickListener {
-
+    private static final String TAG = "LoginActivity";
     private EditText et_account, et_password;
     private Button bt_login;
 
@@ -78,7 +86,15 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         switch (v.getId()) {
             case R.id.bt_login:
 //                toLogin();
-                startActivity(new Intent(mContext, MainActivity.class));
+                boolean isSet = SharedPreferenceUtil.getSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS);
+                if (isSet) {
+                    startActivity(new Intent(mContext, MainActivity.class));
+                    finish();
+                } else {
+                    // 调用 Handler 来异步设置别名
+                    mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, 1 + ""));
+                }
+
                 break;
             default:
                 break;
@@ -147,4 +163,42 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
             showTip(msg);
         }
     }
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs;
+            switch (code) {
+                case 0:
+                    SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, true);
+                    startActivity(new Intent(mContext, MainActivity.class));
+                    finish();
+                    break;
+                case 6002:
+                    SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, false);
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+                default:
+                    SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, false);
+            }
+        }
+    };
+    private static final int MSG_SET_ALIAS = 1001;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+            }
+        }
+    };
+
 }

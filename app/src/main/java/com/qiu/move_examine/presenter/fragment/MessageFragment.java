@@ -57,8 +57,8 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
 
     @Override
     protected void initView() {
-        recyclerView = (SwipeMenuRecyclerView) findView(R.id.recycleView);
-        refreshLayout = (SwipeRefreshLayout) findView(R.id.refresh_swip);
+        recyclerView = findView(R.id.recycleView);
+        refreshLayout = findView(R.id.refresh_swip);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

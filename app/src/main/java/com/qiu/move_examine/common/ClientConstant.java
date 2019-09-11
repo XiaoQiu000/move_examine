@@ -11,4 +11,5 @@ public class ClientConstant {
      */
     public static final String SPREFERENCES_LOGIN_ACCOUNT = "SPREFERENCES_LOGIN_ACCOUNT";//账号
     public static final String SPREFERENCES_LOGIN_PASSWORD = "SPREFERENCES_LOGIN_PASSWORD";//密码
+    public static final String SPREFERENCES_ALIAS = "SPREFERENCES_ALIAS";//别名
 }
