@@ -66,6 +66,6 @@ public class MyJPushMessageReceiver extends JPushMessageReceiver {
     @Override
     public void onNotifyMessageOpened(Context context, NotificationMessage notificationMessage) {
         super.onNotifyMessageOpened(context, notificationMessage);
-        Log.e(TAG, "onNotifyMessageOpened: 点击通知" );
+        Log.e(TAG, "onNotifyMessageOpened: 点击通知" +notificationMessage);
     }
 }

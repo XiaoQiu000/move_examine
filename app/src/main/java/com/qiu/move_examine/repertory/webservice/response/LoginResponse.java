@@ -1,11 +1,14 @@
 package com.qiu.move_examine.repertory.webservice.response;
 
+import com.qiu.move_examine.common.bean.UserInfoBean;
+
 /**
  * @author Mr.Qiu
  */
-public class CommonResponse {
+public class LoginResponse {
     private String message;
     private String status;
+    private UserInfoBean data;
 
     public String getMessage() {
         return message;
@@ -23,4 +26,11 @@ public class CommonResponse {
         this.status = status;
     }
 
+    public UserInfoBean getData() {
+        return data;
+    }
+
+    public void setData(UserInfoBean data) {
+        this.data = data;
+    }
 }

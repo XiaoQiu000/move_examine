@@ -13,7 +13,7 @@ import com.qiu.move_examine.common.base.BaseActivity;
 import com.qiu.move_examine.common.utils.ActionBarUtils;
 import com.qiu.move_examine.contract.LoginContract;
 import com.qiu.move_examine.executer.LoginWorker;
-import com.qiu.move_examine.repertory.webservice.response.CommonResponse;
+import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
 
 import cn.jpush.android.api.JPushInterface;
@@ -69,13 +69,12 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_login:
-                JPushInterface.setAlias(getApplicationContext(), 1, "10");
+//                JPushInterface.setAlias(getApplicationContext(), 1, "10");
 //                boolean isSet = SharedPreferenceUtil.getSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS);
 //                if (!isSet) {
-//                    // 调用 Handler 来异步设置别名
 //                    JPushInterface.setAlias(getApplicationContext(), 1, "10");
 //                }
-//                toLogin();
+                toLogin();
                 break;
             default:
                 break;
@@ -135,7 +134,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     }
 
     @Override
-    public void loginResult(boolean isok, CommonResponse res, String account, String password) {
+    public void loginResult(boolean isok, String msg, LoginResponse res, String account, String password) {
         hideLoading();
         if (isok && res.getStatus().equals("01")) {
             SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT, account);

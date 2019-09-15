@@ -2,6 +2,7 @@ package com.qiu.move_examine.presenter.fragment;
 
 
 import android.support.v4.app.Fragment;
+import android.widget.ImageView;
 
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.base.BaseFragment;
@@ -13,7 +14,7 @@ import com.satsoftec.frame.executer.BaseExecuter;
  * @author Mr.Qiu
  */
 public class TargetFragment extends BaseFragment {
-
+    private ImageView imageview;
 
     public TargetFragment() {
     }
@@ -36,6 +37,10 @@ public class TargetFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        imageview = (ImageView) findView(R.id.imageview);
+    }
 
+    @Override
+    protected void loadData() {
     }
 }

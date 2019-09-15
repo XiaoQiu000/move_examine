@@ -1,6 +1,6 @@
 package com.qiu.move_examine.contract;
 
-import com.qiu.move_examine.repertory.webservice.response.CommonResponse;
+import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.presenter.BasePresenter;
 
@@ -26,6 +26,6 @@ public class LoginContract {
          * @param account
          * @param password
          */
-        void loginResult(boolean isok, CommonResponse res, String account, String password);
+        void loginResult(boolean isok, String msg, LoginResponse res, String account, String password);
     }
 }
