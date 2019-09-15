@@ -10,6 +10,11 @@
     <color name="background2">#00cbd8</color><!--背景基本色调-->
     <color name="background3">#191b24</color><!--背景基本色调-->
     <color name="background4">#272a34</color><!--背景基本色调-->
+    <color name="background5">#1b1b1b</color><!--背景基本色调-->
+    <color name="background6">#1b1b1b</color><!--背景基本色调-->
+    <color name="background_a">#009944</color><!--背景基本色调-->
+    <color name="background_b">#EC6941</color><!--背景基本色调-->
+    <color name="background_c">#E60012</color><!--背景基本色调-->
     <!--常用文本颜色-->
     <color name="text0">#ffffff</color>
     <color name="text1">#232323</color>
@@ -21,5 +26,7 @@
     <color name="text7">#1f4ba5</color>
     <color name="text8">#e23a3c</color>
     <color name="text9">#00cbd8</color>
+    <color name="text10">#B5EBff</color>
     <color name="translate">#00000000</color>
+    <color name="white">#ffffff</color>
 </resources>

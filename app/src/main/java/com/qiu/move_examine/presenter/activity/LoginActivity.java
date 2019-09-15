@@ -85,30 +85,32 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
      * 登录
      */
     private void toLogin() {
-        et_account.setError(null);
-        et_password.setError(null);
-
-        String account = et_account.getText().toString();
-        if (TextUtils.isEmpty(account)) {
-            et_account.setError(getString(R.string.error_field_required));
-            et_account.requestFocus();
-            return;
-        }
-
-        String password = et_password.getText().toString();
-        if (TextUtils.isEmpty(password)) {
-            et_password.setError(getString(R.string.error_invalid_password));
-            et_password.requestFocus();
-            return;
-        }
-
-        showLoading("正在登录...", new ProgressInterruptListener() {
-            @Override
-            public void onProgressInterruptListener(ProgressDialog progressDialog) {
-                hideLoading();
-            }
-        });
-        executor.loginByAccount(account, password);
+        startActivity(new Intent(mContext, MainActivity.class));
+        finish();
+//        et_account.setError(null);
+//        et_password.setError(null);
+//
+//        String account = et_account.getText().toString();
+//        if (TextUtils.isEmpty(account)) {
+//            et_account.setError(getString(R.string.error_field_required));
+//            et_account.requestFocus();
+//            return;
+//        }
+//
+//        String password = et_password.getText().toString();
+//        if (TextUtils.isEmpty(password)) {
+//            et_password.setError(getString(R.string.error_invalid_password));
+//            et_password.requestFocus();
+//            return;
+//        }
+//
+//        showLoading("正在登录...", new ProgressInterruptListener() {
+//            @Override
+//            public void onProgressInterruptListener(ProgressDialog progressDialog) {
+//                hideLoading();
+//            }
+//        });
+//        executor.loginByAccount(account, password);
     }
 
     @Override

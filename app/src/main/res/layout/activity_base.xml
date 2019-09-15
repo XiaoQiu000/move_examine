@@ -41,12 +41,6 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
-    <View
-        android:id="@+id/base_line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#e4e4e4"></View>
-
     <RelativeLayout
         android:id="@+id/b_content"
         android:layout_width="match_parent"

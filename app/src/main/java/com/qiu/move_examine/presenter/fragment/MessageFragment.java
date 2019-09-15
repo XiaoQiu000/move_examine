@@ -15,6 +15,7 @@ import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseFragment;
 import com.qiu.move_examine.contract.MessageContract;
 import com.qiu.move_examine.executer.MessageWorker;
+import com.qiu.move_examine.presenter.activity.MessageDetailsActivity;
 import com.qiu.move_examine.presenter.adapter.MessageAdapter;
 import com.qiu.move_examine.repertory.db.bean.MessageInfo;
 import com.satsoftec.frame.executer.BaseExecuter;
@@ -69,7 +70,8 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
         recyclerView.setSwipeItemClickListener(new SwipeItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-
+                Intent intent = new Intent(mContext, MessageDetailsActivity.class);
+                startActivity(intent);
             }
         });
     }

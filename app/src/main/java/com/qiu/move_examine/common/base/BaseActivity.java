@@ -88,7 +88,6 @@ public abstract class BaseActivity<T extends BaseExecuter> extends AppCompatActi
 
     protected void hideTitle() {
         toolbar.setVisibility(View.GONE);
-        findViewById(R.id.base_line).setVisibility(View.GONE);
     }
 
     protected void showTitle() {
@@ -108,7 +107,7 @@ public abstract class BaseActivity<T extends BaseExecuter> extends AppCompatActi
         TextView toolbarTitle = (TextView) findViewById(R.id.title);
         toolbarTitle.setText(title);
 
-        toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
+        toolbar.setBackgroundColor(getResources().getColor(android.R.color.black));
     }
 
     protected void init() {

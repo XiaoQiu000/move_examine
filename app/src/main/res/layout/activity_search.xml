@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background3"
+    android:orientation="vertical"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
+    tools:context=".presenter.activity.SearchActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="目标类型："
+            android:textColor="@color/text10"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_search_type"
+                android:paddingLeft="5dp"
+                android:text="人"
+                android:textColor="@color/text0"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:button="@drawable/check_search_type"
+                android:paddingLeft="5dp"
+                android:text="车"
+                android:textColor="@color/text0"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_thing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:button="@drawable/check_search_type"
+                android:paddingLeft="5dp"
+                android:text="物"
+                android:textColor="@color/text0"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="布控类型："
+            android:textColor="@color/text10"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_arrest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/check_search_type"
+                android:paddingLeft="5dp"
+                android:text="抓捕"
+                android:textColor="@color/text0"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_intercept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:button="@drawable/check_search_type"
+                android:paddingLeft="5dp"
+                android:text="拦截"
+                android:textColor="@color/text0"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:button="@drawable/check_search_type"
+                android:paddingLeft="5dp"
+                android:text="通知"
+                android:textColor="@color/text0"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="37dp"
+            android:text="姓名："
+            android:textColor="@color/text10"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_search2"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColorHint="@color/text10"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="37dp"
+            android:text="性别："
+            android:textColor="@color/text10"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_search2"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:drawableRight="@mipmap/icon_pull"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:text="男"
+            android:textColor="@color/text0"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="37dp"
+            android:text="体态："
+            android:textColor="@color/text10"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:drawableRight="@mipmap/icon_pull"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_search2"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:text="胖"
+            android:textColor="@color/text0"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="身份证号:"
+            android:textColor="@color/text10"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_search2"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:singleLine="true"
+            android:textColorHint="@color/text10"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

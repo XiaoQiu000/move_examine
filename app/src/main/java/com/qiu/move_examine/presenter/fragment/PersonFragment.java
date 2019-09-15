@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.base.BaseFragment;
+import com.qiu.move_examine.common.utils.PicassoUtils;
 import com.satsoftec.frame.executer.BaseExecuter;
 
 /**
@@ -46,6 +47,7 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
-
+        PicassoUtils.getinstance().loadImage(mContext,"http://47.98.216.253:81/demo.png",iv_head,
+                R.mipmap.ic_launcher);
     }
 }
