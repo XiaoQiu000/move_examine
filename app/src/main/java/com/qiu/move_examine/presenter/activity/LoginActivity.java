@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.qiu.move_examine.R;
+import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseActivity;
 import com.qiu.move_examine.common.utils.ActionBarUtils;
@@ -85,32 +86,30 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
      * 登录
      */
     private void toLogin() {
-        startActivity(new Intent(mContext, MainActivity.class));
-        finish();
-//        et_account.setError(null);
-//        et_password.setError(null);
-//
-//        String account = et_account.getText().toString();
-//        if (TextUtils.isEmpty(account)) {
-//            et_account.setError(getString(R.string.error_field_required));
-//            et_account.requestFocus();
-//            return;
-//        }
-//
-//        String password = et_password.getText().toString();
-//        if (TextUtils.isEmpty(password)) {
-//            et_password.setError(getString(R.string.error_invalid_password));
-//            et_password.requestFocus();
-//            return;
-//        }
-//
-//        showLoading("正在登录...", new ProgressInterruptListener() {
-//            @Override
-//            public void onProgressInterruptListener(ProgressDialog progressDialog) {
-//                hideLoading();
-//            }
-//        });
-//        executor.loginByAccount(account, password);
+        et_account.setError(null);
+        et_password.setError(null);
+
+        String account = et_account.getText().toString();
+        if (TextUtils.isEmpty(account)) {
+            et_account.setError(getString(R.string.error_field_required));
+            et_account.requestFocus();
+            return;
+        }
+
+        String password = et_password.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            et_password.setError(getString(R.string.error_invalid_password));
+            et_password.requestFocus();
+            return;
+        }
+
+        showLoading("正在登录...", new ProgressInterruptListener() {
+            @Override
+            public void onProgressInterruptListener(ProgressDialog progressDialog) {
+                hideLoading();
+            }
+        });
+        executor.loginByAccount(account, password);
     }
 
     @Override
@@ -141,6 +140,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         if (isok && res.getStatus().equals("01")) {
             SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT, account);
             SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD, password);
+            AppContext.self().setUserInfo(res.getData());
             startActivity(new Intent(mContext, MainActivity.class));
             finish();
         } else {

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.text.TextUtils;
 
 import com.qiu.move_examine.common.base.ApplicationEx;
+import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.repertory.db.AppDbInfo;
 import com.qiu.move_examine.repertory.webservice.AppWsInfo;
 import com.satsoftec.frame.SFrame;
@@ -24,6 +25,7 @@ import java.io.File;
 public class AppContext implements SDatabaseDeclare, SWebServiceDeclare, SAppDeclare {
     private static AppContext self;
     private ApplicationEx application;
+    private UserInfoBean userInfo;
 
     private AppContext() {
     }
@@ -49,6 +51,13 @@ public class AppContext implements SDatabaseDeclare, SWebServiceDeclare, SAppDec
         SFrame.init(this);
     }
 
+    public UserInfoBean getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfoBean userInfo) {
+        this.userInfo = userInfo;
+    }
 
     @Override
     public DatabaseInfo getDatabaseInfo() {

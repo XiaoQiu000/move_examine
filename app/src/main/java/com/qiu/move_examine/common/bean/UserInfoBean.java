@@ -25,16 +25,16 @@ public class UserInfoBean {
 
     private int id;
     private String perName;
-    private Object perIcon;
+    private String perIcon;
     private String inspectionUnit;
     private String perTel;
     private String perNo;
     private String perPwd;
-    private Object perType;
-    private Object crtPerNo;
-    private Object crtTime;
-    private Object uptPerNo;
-    private Object uptTime;
+    private String perType;
+    private String crtPerNo;
+    private String crtTime;
+    private String uptPerNo;
+    private String uptTime;
     private String dtSta;
     private Object field1;
     private Object field2;
@@ -56,11 +56,11 @@ public class UserInfoBean {
         this.perName = perName;
     }
 
-    public Object getPerIcon() {
+    public String getPerIcon() {
         return perIcon;
     }
 
-    public void setPerIcon(Object perIcon) {
+    public void setPerIcon(String perIcon) {
         this.perIcon = perIcon;
     }
 
@@ -96,43 +96,43 @@ public class UserInfoBean {
         this.perPwd = perPwd;
     }
 
-    public Object getPerType() {
+    public String getPerType() {
         return perType;
     }
 
-    public void setPerType(Object perType) {
+    public void setPerType(String perType) {
         this.perType = perType;
     }
 
-    public Object getCrtPerNo() {
+    public String getCrtPerNo() {
         return crtPerNo;
     }
 
-    public void setCrtPerNo(Object crtPerNo) {
+    public void setCrtPerNo(String crtPerNo) {
         this.crtPerNo = crtPerNo;
     }
 
-    public Object getCrtTime() {
+    public String getCrtTime() {
         return crtTime;
     }
 
-    public void setCrtTime(Object crtTime) {
+    public void setCrtTime(String crtTime) {
         this.crtTime = crtTime;
     }
 
-    public Object getUptPerNo() {
+    public String getUptPerNo() {
         return uptPerNo;
     }
 
-    public void setUptPerNo(Object uptPerNo) {
+    public void setUptPerNo(String uptPerNo) {
         this.uptPerNo = uptPerNo;
     }
 
-    public Object getUptTime() {
+    public String getUptTime() {
         return uptTime;
     }
 
-    public void setUptTime(Object uptTime) {
+    public void setUptTime(String uptTime) {
         this.uptTime = uptTime;
     }
 
