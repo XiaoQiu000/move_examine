@@ -62,6 +62,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame, messageFragment).commit();
         preFragment = messageFragment;
+        //隐藏登陆界面的loading框
+        hideLoading();
     }
 
     @Override

@@ -13,10 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.activity.SearchActivity"></activity>
+        <activity android:name=".presenter.activity.WelcomeActivity"></activity>
+        <activity android:name=".presenter.activity.SearchActivity" />
         <activity android:name=".presenter.activity.MessageDetailsActivity" />
         <activity
             android:name=".presenter.activity.MainActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.activity.LoginActivity"

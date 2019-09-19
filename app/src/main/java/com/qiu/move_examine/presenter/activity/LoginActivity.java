@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.AppContext;
@@ -26,6 +27,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     private static final String TAG = "LoginActivity";
     private EditText et_account, et_password;
     private Button bt_login;
+    private boolean fromExtra = false;//是否退出登录过来的
 
     @Override
     public LoginContract.LoginExecute initExecutor() {
@@ -35,6 +37,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     @Override
     protected void init() {
         setContent(R.layout.activity_login);
+        fromExtra = getIntent().getBooleanExtra(ClientConstant.SPREFERENCES_LOGIN_EXIT, false);
     }
 
     @Override
@@ -47,13 +50,12 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         et_account = findViewById(R.id.et_account);
         et_password = findViewById(R.id.et_password);
         bt_login = findViewById(R.id.bt_login);
-
+        bt_login.setEnabled(false);
         bt_login.setOnClickListener(this);
         et_account.setOnFocusChangeListener(this);
         et_password.setOnFocusChangeListener(this);
         et_account.clearFocus();
         et_password.clearFocus();
-        JPushInterface.setAlias(getApplicationContext(), 1, null);
     }
 
     @Override
@@ -64,18 +66,46 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
             et_account.setText(account);
             et_password.setText(password);
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (fromExtra) {
+                    findViewById(R.id.welcomeTv).setVisibility(View.GONE);
+                    findViewById(R.id.login_input).setVisibility(View.VISIBLE);
+                } else {
+                    try {
+
+
+
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //如果已经退出登录过
+                            boolean isExit = SharedPreferenceUtil.getSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT);
+                            if (isExit) {
+                                toLogin(false);
+                            } else {
+                                findViewById(R.id.welcomeTv).setVisibility(View.GONE);
+                                findViewById(R.id.login_input).setVisibility(View.VISIBLE);
+                                bt_login.setEnabled(true);
+                            }
+                        }
+                    });
+                }
+            }
+        }).start();
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_login:
-//                JPushInterface.setAlias(getApplicationContext(), 1, "10");
-//                boolean isSet = SharedPreferenceUtil.getSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS);
-//                if (!isSet) {
-//                    JPushInterface.setAlias(getApplicationContext(), 1, "10");
-//                }
-                toLogin();
+                toLogin(true);
                 break;
             default:
                 break;
@@ -85,7 +115,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     /**
      * 登录
      */
-    private void toLogin() {
+    private void toLogin(boolean isShowDialog) {
         et_account.setError(null);
         et_password.setError(null);
 
@@ -102,13 +132,14 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
             et_password.requestFocus();
             return;
         }
-
-        showLoading("正在登录...", new ProgressInterruptListener() {
-            @Override
-            public void onProgressInterruptListener(ProgressDialog progressDialog) {
-                hideLoading();
-            }
-        });
+        if (isShowDialog) {
+            showLoading("正在登录...", new ProgressInterruptListener() {
+                @Override
+                public void onProgressInterruptListener(ProgressDialog progressDialog) {
+                    hideLoading();
+                }
+            });
+        }
         executor.loginByAccount(account, password);
     }
 
@@ -136,11 +167,17 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
 
     @Override
     public void loginResult(boolean isok, String msg, LoginResponse res, String account, String password) {
-        hideLoading();
         if (isok && res.getStatus().equals("01")) {
+            //保存基本信息
+            SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);
             SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT, account);
             SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD, password);
             AppContext.self().setUserInfo(res.getData());
+            //设置别名
+            boolean isSet = SharedPreferenceUtil.getSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS);
+            if (!isSet) {
+                JPushInterface.setAlias(getApplicationContext(), 2, String.valueOf(res.getData().getId()));
+            }
             startActivity(new Intent(mContext, MainActivity.class));
             finish();
         } else {

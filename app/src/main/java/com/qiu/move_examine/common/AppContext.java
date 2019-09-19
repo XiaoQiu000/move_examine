@@ -1,10 +1,13 @@
 package com.qiu.move_examine.common;
 
 import android.app.Application;
+import android.content.Intent;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.qiu.move_examine.common.base.ApplicationEx;
 import com.qiu.move_examine.common.bean.UserInfoBean;
+import com.qiu.move_examine.presenter.activity.LoginActivity;
 import com.qiu.move_examine.repertory.db.AppDbInfo;
 import com.qiu.move_examine.repertory.webservice.AppWsInfo;
 import com.satsoftec.frame.SFrame;
@@ -12,10 +15,14 @@ import com.satsoftec.frame.declare.SAppDeclare;
 import com.satsoftec.frame.declare.SDatabaseDeclare;
 import com.satsoftec.frame.declare.SWebServiceDeclare;
 import com.satsoftec.frame.repertory.dbTool.DatabaseInfo;
+import com.satsoftec.frame.repertory.dbTool.DatabaseManage;
 import com.satsoftec.frame.repertory.remote.WebServiceInfo;
 import com.satsoftec.frame.util.AndroidUtil;
+import com.satsoftec.frame.util.SharedPreferenceUtil;
 
 import java.io.File;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * @author liuyixian
@@ -73,4 +80,5 @@ public class AppContext implements SDatabaseDeclare, SWebServiceDeclare, SAppDec
     public Application getApplication() {
         return this.application;
     }
+
 }

@@ -53,11 +53,11 @@ public class MyJPushMessageReceiver extends JPushMessageReceiver {
                 SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, true);
                 break;
             case 6002:
-                Log.e(TAG, "onAliasOperatorResult: 设置别名失败");
+                Log.e(TAG, "onAliasOperatorResult: 设置别名失败1");
                 SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, false);
                 break;
             default:
-                Log.e(TAG, "onAliasOperatorResult: 设置别名失败");
+                Log.e(TAG, "onAliasOperatorResult: 设置别名失败2");
                 SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, false);
                 break;
         }

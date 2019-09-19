@@ -30,8 +30,9 @@
                 android:checked="true"
                 android:drawableTop="@drawable/rb_message"
                 android:gravity="center"
-                android:paddingTop="6dp"
+                android:paddingTop="8dp"
                 android:text="我的消息"
+                android:textSize="12sp"
                 android:textColor="@drawable/textchane" />
 
             <RelativeLayout
@@ -73,7 +74,8 @@
                 android:button="@null"
                 android:drawableTop="@drawable/rb_target"
                 android:gravity="center"
-                android:paddingTop="6dp"
+                android:textSize="12sp"
+                android:paddingTop="8dp"
                 android:text="目标库"
                 android:textColor="@drawable/textchane" />
 
@@ -92,7 +94,8 @@
                 android:button="@null"
                 android:drawableTop="@drawable/rb_person"
                 android:gravity="center"
-                android:paddingTop="6dp"
+                android:textSize="12sp"
+                android:paddingTop="8dp"
                 android:text="我的"
                 android:textColor="@drawable/textchane" />
         </com.qiu.move_examine.common.view.GetTouchRelativeLayout>

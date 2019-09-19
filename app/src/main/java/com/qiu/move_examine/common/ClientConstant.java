@@ -9,7 +9,8 @@ public class ClientConstant {
     /**
      * 以下是公用数据缓存
      */
+    public static final String SPREFERENCES_LOGIN_EXIT = "SPREFERENCES_LOGIN_EXIT";//是否退出登录
     public static final String SPREFERENCES_LOGIN_ACCOUNT = "SPREFERENCES_LOGIN_ACCOUNT";//账号
     public static final String SPREFERENCES_LOGIN_PASSWORD = "SPREFERENCES_LOGIN_PASSWORD";//密码
-    public static final String SPREFERENCES_ALIAS = "SPREFERENCES_ALIAS";//别名
+    public static final String SPREFERENCES_ALIAS = "SPREFERENCES_ALIAS";//是否设置别名
 }

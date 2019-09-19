@@ -8,19 +8,42 @@
     tools:context=".presenter.activity.LoginActivity">
 
     <ImageView
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:src="@mipmap/icon_police" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="170dp"
+        android:text="城阳移动盘查"
+        android:textColor="@color/text9"
+        android:textSize="38sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/welcomeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:text="欢迎进入\n城阳移动盘查系统"
+        android:textColor="@color/text10"
+        android:textSize="25sp"
+        android:visibility="visible" />
+
     <LinearLayout
+        android:id="@+id/login_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="55dp"
         android:layout_marginRight="55dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
