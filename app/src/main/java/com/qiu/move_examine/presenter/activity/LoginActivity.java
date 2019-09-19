@@ -74,9 +74,6 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
                     findViewById(R.id.login_input).setVisibility(View.VISIBLE);
                 } else {
                     try {
-
-
-
                         Thread.sleep(1500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
