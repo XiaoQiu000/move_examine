@@ -18,8 +18,6 @@ import com.qiu.move_examine.executer.LoginWorker;
 import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
 
-import cn.jpush.android.api.JPushInterface;
-
 /**
  * @author Mr.Qiu
  */
@@ -170,11 +168,6 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
             SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT, account);
             SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD, password);
             AppContext.self().setUserInfo(res.getData());
-            //设置别名
-            boolean isSet = SharedPreferenceUtil.getSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS);
-            if (!isSet) {
-                JPushInterface.setAlias(getApplicationContext(), 2, String.valueOf(res.getData().getId()));
-            }
             startActivity(new Intent(mContext, MainActivity.class));
             finish();
         } else {

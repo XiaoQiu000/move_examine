@@ -22,8 +22,6 @@ import com.satsoftec.frame.util.SharedPreferenceUtil;
 
 import java.io.File;
 
-import cn.jpush.android.api.JPushInterface;
-
 /**
  * @author liuyixian
  * @date 2017/9/20

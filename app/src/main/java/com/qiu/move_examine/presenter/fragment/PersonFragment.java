@@ -21,8 +21,6 @@ import com.qiu.move_examine.presenter.activity.LoginActivity;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
 
-import cn.jpush.android.api.JPushInterface;
-
 /**
  * A simple {@link Fragment} subclass.
  * 个人中心
@@ -95,9 +93,6 @@ public class PersonFragment extends BaseFragment {
         SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, false);
         getApplicationEx().closeAllActivity();
         AppContext.self().setUserInfo(null);
-        //清除别名
-        SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_ALIAS, false);
-        JPushInterface.deleteAlias(mContext.getApplicationContext(), 1000);
         //开启登录界面
         Intent intent = new Intent(mContext, LoginActivity.class);
         intent.putExtra(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);
