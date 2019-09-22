@@ -1,11 +1,17 @@
 package com.qiu.move_examine.common;
 
 
+import com.qiu.move_examine.common.bean.UserInfoBean;
+
 /**
  * @author Mr.Qiu
  * @date 19/9/8
  */
 public class ClientConstant {
+    /**
+     * 连接成功之后的全局缓存
+     */
+    public static String sessionId = "";
     /**
      * 以下是公用数据缓存
      */

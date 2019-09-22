@@ -1,6 +1,7 @@
 package com.satsoftec.frame;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.satsoftec.frame.declare.SAppDeclare;
 import com.satsoftec.frame.declare.SDatabaseDeclare;
 import com.satsoftec.frame.declare.SWebServiceDeclare;
@@ -39,9 +40,9 @@ public class SFrame {
         }
     }
 
-    public static Gson getGson(){
-        if(SFrame.gson==null){
-            SFrame.gson=new Gson();
+    public static Gson getGson() {
+        if (SFrame.gson == null) {
+            SFrame.gson = new GsonBuilder().disableHtmlEscaping().create();
         }
         return SFrame.gson;
     }

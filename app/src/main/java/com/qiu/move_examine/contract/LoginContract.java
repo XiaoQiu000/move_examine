@@ -1,6 +1,7 @@
 package com.qiu.move_examine.contract;
 
-import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
+import com.qiu.move_examine.repertory.webservice.response.ConnectResponse;
+import com.qiu.move_examine.repertory.webservice.response.QueryResponse;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.presenter.BasePresenter;
 
@@ -16,6 +17,8 @@ public class LoginContract {
          * @param password 密码
          */
         void loginByAccount(String account, String password);
+
+        void connect(String account, String password);
     }
 
     public interface LoginPresenter extends BasePresenter<LoginExecute> {
@@ -26,6 +29,8 @@ public class LoginContract {
          * @param account
          * @param password
          */
-        void loginResult(boolean isok, String msg, LoginResponse res, String account, String password);
+        void loginResult(boolean isok, String msg, QueryResponse res, String account, String password);
+
+        void connectResult(boolean isok, String msg, ConnectResponse res,String account, String password);
     }
 }

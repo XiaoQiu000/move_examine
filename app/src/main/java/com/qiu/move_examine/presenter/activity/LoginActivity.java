@@ -3,20 +3,25 @@ package com.qiu.move_examine.presenter.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseActivity;
+import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.common.utils.ActionBarUtils;
 import com.qiu.move_examine.contract.LoginContract;
 import com.qiu.move_examine.executer.LoginWorker;
-import com.qiu.move_examine.repertory.webservice.response.LoginResponse;
+import com.qiu.move_examine.repertory.webservice.request.QueryRequest;
+import com.qiu.move_examine.repertory.webservice.response.ConnectResponse;
+import com.qiu.move_examine.repertory.webservice.response.QueryResponse;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
+
+import java.util.List;
 
 /**
  * @author Mr.Qiu
@@ -54,10 +59,13 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         et_password.setOnFocusChangeListener(this);
         et_account.clearFocus();
         et_password.clearFocus();
+
+
     }
 
     @Override
     protected void loadData() {
+
         String account = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT);
         String password = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD);
         if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(password)) {
@@ -134,8 +142,10 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
                     hideLoading();
                 }
             });
+            executor.connect(account, password);
+        } else {
+            executor.loginByAccount(account, password);
         }
-        executor.loginByAccount(account, password);
     }
 
     @Override
@@ -161,17 +171,56 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     }
 
     @Override
-    public void loginResult(boolean isok, String msg, LoginResponse res, String account, String password) {
-        if (isok && res.getStatus().equals("01")) {
-            //保存基本信息
-            SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);
-            SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT, account);
-            SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD, password);
-            AppContext.self().setUserInfo(res.getData());
-            startActivity(new Intent(mContext, MainActivity.class));
-            finish();
+    public void connectResult(boolean isok, String msg, ConnectResponse res, String account, String password) {
+        if (!isok) {
+            showTip(msg);
+            hideLoading();
+            return;
+        }
+        if (res.getResult() != null) {
+            if (res.getResult().getCode().equals("1")) {
+                ClientConstant.sessionId = res.getResult().getData().getSessionId();
+                executor.loginByAccount(account, password);
+            } else {
+                showTip("连接异常，请重试");
+                hideLoading();
+            }
         } else {
-            showTip(res.getMessage());
+            showTip(res.getError().getMessage());
+            hideLoading();
         }
     }
+
+    @Override
+    public void loginResult(boolean isok, String msg, QueryResponse res, String account, String password) {
+        if (!isok) {
+            showTip(msg);
+            hideLoading();
+            return;
+        }
+        if (res.getResult() != null) {
+            if (res.getResult().getCode().equals("1")) {
+                SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);
+                SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT, account);
+                SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD, password);
+                List<QueryResponse.ResultBean.DataBean.FieldValuesBean> fieldValues = res.getResult().getData().get(0).getFieldValues();
+                UserInfoBean userInfoBean = new UserInfoBean();
+                userInfoBean.setId(fieldValues.get(0).getValue());
+                userInfoBean.setPerName(fieldValues.get(1).getValue());
+                userInfoBean.setPerIcon(fieldValues.get(2).getValue());
+                userInfoBean.setInspectionUnit(fieldValues.get(3).getValue());
+                userInfoBean.setPerTel(fieldValues.get(4).getValue());
+                AppContext.self().setUserInfo(userInfoBean);
+                startActivity(new Intent(mContext, MainActivity.class));
+                finish();
+            } else {
+                showTip("登录异常，请重试");
+                hideLoading();
+            }
+        } else {
+            showTip(res.getError().getMessage());
+            hideLoading();
+        }
+    }
+
 }

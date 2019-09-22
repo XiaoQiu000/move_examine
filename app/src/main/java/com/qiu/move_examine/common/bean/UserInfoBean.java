@@ -13,17 +13,17 @@ public class UserInfoBean {
      * perNo : 3714220001
      * perPwd : 123456
      * perType : null
-     * crtPerNo : null
-     * crtTime : null
-     * uptPerNo : null
-     * uptTime : null
+     * crtPerNo : null 创建人
+     * crtTime : null 创建时间
+     * uptPerNo : null 更新人
+     * uptTime : null 更新时间
      * dtSta : N
      * field1 : null
      * field2 : null
      * field3 : null
      */
 
-    private int id;
+    private String id;
     private String perName;
     private String perIcon;
     private String inspectionUnit;
@@ -40,11 +40,11 @@ public class UserInfoBean {
     private Object field2;
     private Object field3;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

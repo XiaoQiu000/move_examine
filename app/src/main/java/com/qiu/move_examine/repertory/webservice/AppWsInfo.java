@@ -1,8 +1,7 @@
 package com.qiu.move_examine.repertory.webservice;
 
-import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.base.Response;
-import com.qiu.move_examine.repertory.webservice.service.LoginService;
+import com.qiu.move_examine.repertory.webservice.service.CommonService;
 import com.satsoftec.frame.SFrame;
 import com.satsoftec.frame.repertory.remote.ResultCheck;
 import com.satsoftec.frame.repertory.remote.ResultConvertor;
@@ -20,7 +19,7 @@ public class AppWsInfo extends WebServiceInfo {
     @Override
     public Class<?>[] getInterFaceClass() {
         return new Class<?>[]{
-                LoginService.class
+                CommonService.class
         };
     }
 
