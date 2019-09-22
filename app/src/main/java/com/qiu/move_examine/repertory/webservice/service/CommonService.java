@@ -40,6 +40,19 @@ public class CommonService extends BaseWebService {
         return queryInterface(USER_LOGIN_BY_ACCOUNT, condition, 0, 0);
     }
 
+    /**
+     * 查询目标库列表
+     *
+     * @param phone
+     * @param password
+     * @return
+     */
+    public final static String TARGET_LIST = "/mobileInventory/pushData/qryAll";
+
+    public WebTask<QueryResponse> targetList(int page, int pageSize) {
+        String condition = "";
+        return queryInterface(TARGET_LIST, condition, page, pageSize);
+    }
 
     /**
      * 建立连接接口

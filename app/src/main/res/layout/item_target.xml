@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="118dp"
     android:layout_marginLeft="18dp"
     android:layout_marginTop="15dp"
     android:layout_marginRight="18dp"
@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/coverIv"
             android:layout_width="88dp"
             android:layout_height="88dp"
             android:layout_gravity="center_vertical"
@@ -33,6 +34,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/targetTypeTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_text_notice"
@@ -46,6 +48,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/involveCaseTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -56,30 +59,146 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
-
+            <!--人-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/personLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:visibility="visible">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="10"
-                    android:text="姓名：某某某"
-                    android:textColor="@color/text0"
-                    android:textSize="12sp" />
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/perNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="10"
+                        android:text="姓名：某某某"
+                        android:textColor="@color/text0"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/perFeatureTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:maxLines="1"
+                        android:text="男   瘦"
+                        android:textColor="@color/text0"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:maxLines="1"
-                    android:text="性别：男   瘦"
-                    android:textColor="@color/text0"
-                    android:textSize="12sp" />
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/perCardNoTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="身份证：12312312312312312"
+                        android:textColor="@color/text0"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--车-->
+            <LinearLayout
+                android:id="@+id/carLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/carNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="10"
+                        android:text="品牌：某某某"
+                        android:textColor="@color/text0"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/carColorTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:maxLines="1"
+                        android:text="颜色：黑"
+                        android:textColor="@color/text0"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/carNumberTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="车牌：鲁B12345"
+                        android:textColor="@color/text0"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--物-->
+            <LinearLayout
+                android:id="@+id/thingLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/thingNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="10"
+                        android:text="物品：行李箱"
+                        android:textColor="@color/text0"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/thingFeatureTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:maxLines="1"
+                        android:text="灰色   长方"
+                        android:textColor="@color/text0"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -89,22 +208,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="身份证：12312312312312312"
-                    android:textColor="@color/text0"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <TextView
+                    android:id="@+id/descriptionTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -115,23 +219,29 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_marginTop="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:maxLines="1"
-                    android:text="09/01 09:30"
-                    android:textColor="@color/text0"
-                    android:textSize="9sp" />
-
-            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/timeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="5dp"
+            android:maxLines="1"
+            android:text="09/01 09:30"
+            android:textColor="@color/text0"
+            android:textSize="9sp" />
+
+    </RelativeLayout>
 </RelativeLayout>
