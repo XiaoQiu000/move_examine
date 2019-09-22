@@ -8,4 +8,41 @@
     <string name="error_field_required">账号不能为空</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="sex_array">
+        <item>男</item>
+        <item>女</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="figure_array">
+        <item>胖</item>
+        <item>瘦</item>
+    </string-array>
+
+    <string-array name="car_name_array">
+        <item>丰田-汉兰达</item>
+        <item>奔驰-200</item>
+    </string-array>
+
+    <string-array name="car_name_color">
+        <item>红色</item>
+        <item>白色</item>
+        <item>黑色</item>
+        <item>绿色</item>
+        <item>粉色</item>
+        <item>紫色</item>
+        <item>蓝色</item>
+    </string-array>
+
+    <string-array name="thing_name_color">
+        <item>红色</item>
+        <item>白色</item>
+        <item>黑色</item>
+        <item>绿色</item>
+        <item>粉色</item>
+        <item>紫色</item>
+        <item>蓝色</item>
+    </string-array>
 </resources>

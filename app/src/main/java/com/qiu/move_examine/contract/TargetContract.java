@@ -10,7 +10,7 @@ import com.satsoftec.frame.presenter.BasePresenter;
  */
 public class TargetContract {
     public interface TargetExecute extends BaseExecuter {
-        void loadTargetList(int page, int pageSize);
+        void loadTargetList(String condition, int page, int pageSize);
     }
 
     public interface TargetPresenter extends BasePresenter<TargetExecute> {

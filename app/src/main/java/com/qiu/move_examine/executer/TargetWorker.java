@@ -18,8 +18,8 @@ public class TargetWorker implements TargetContract.TargetExecute {
     }
 
     @Override
-    public void loadTargetList(int page, int pageSize) {
-        WebServiceManage.getService(CommonService.class).targetList(page, pageSize).setCallback(new SCallBack<QueryResponse>() {
+    public void loadTargetList(String condition, int page, int pageSize) {
+        WebServiceManage.getService(CommonService.class).targetList(condition, page, pageSize).setCallback(new SCallBack<QueryResponse>() {
             @Override
             public void callback(boolean isok, String msg, QueryResponse res) {
                 presenter.targetListResult(isok, msg, res);

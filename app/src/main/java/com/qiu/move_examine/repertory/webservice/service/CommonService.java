@@ -49,8 +49,7 @@ public class CommonService extends BaseWebService {
      */
     public final static String TARGET_LIST = "/mobileInventory/pushData/qryAll";
 
-    public WebTask<QueryResponse> targetList(int page, int pageSize) {
-        String condition = "";
+    public WebTask<QueryResponse> targetList(String condition, int page, int pageSize) {
         return queryInterface(TARGET_LIST, condition, page, pageSize);
     }
 

@@ -7,6 +7,7 @@
     <color name="ripple1">#666666</color>
     <!--常用背景颜色-->
     <color name="background">#f2f2f2</color><!--背景基本色调-->
+    <color name="background1">#666666</color><!--背景基本色调-->
     <color name="background2">#00cbd8</color><!--背景基本色调-->
     <color name="background3">#191b24</color><!--背景基本色调-->
     <color name="background4">#272a34</color><!--背景基本色调-->

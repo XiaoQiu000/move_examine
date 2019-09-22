@@ -85,6 +85,7 @@
                 android:textSize="18sp" />
 
             <RadioGroup
+                android:id="@+id/monitor_radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -139,6 +140,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/personNameTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -148,6 +150,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/person_et"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
@@ -177,21 +180,15 @@
                     android:textColor="@color/text10"
                     android:textSize="18sp" />
 
-                <TextView
+                <Spinner
+                    android:id="@+id/spinner_sex"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/shape_search2"
-                    android:drawableRight="@mipmap/icon_pull"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="15dp"
-                    android:singleLine="true"
-                    android:text="男"
-                    android:textColor="@color/text0"
-                    android:textSize="18sp" />
+                    android:background="@null"
+                    android:gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -209,21 +206,15 @@
                     android:textColor="@color/text10"
                     android:textSize="18sp" />
 
-                <TextView
+                <Spinner
+                    android:id="@+id/spinner_figure"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/shape_search2"
-                    android:drawableRight="@mipmap/icon_pull"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="15dp"
-                    android:singleLine="true"
-                    android:text="胖"
-                    android:textColor="@color/text0"
-                    android:textSize="18sp" />
+                    android:background="@null"
+                    android:gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -242,6 +233,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/personNum_et"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
@@ -280,21 +272,15 @@
                     android:textColor="@color/text10"
                     android:textSize="18sp" />
 
-                <TextView
+                <Spinner
+                    android:id="@+id/spinner_car_name"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/shape_search2"
-                    android:drawableRight="@mipmap/icon_pull"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="15dp"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textColor="@color/text0"
-                    android:textSize="18sp" />
+                    android:background="@null"
+                    android:gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -312,21 +298,15 @@
                     android:textColor="@color/text10"
                     android:textSize="18sp" />
 
-                <TextView
+                <Spinner
+                    android:id="@+id/spinner_car_color"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/shape_search2"
-                    android:drawableRight="@mipmap/icon_pull"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="15dp"
-                    android:singleLine="true"
-                    android:text="红色"
-                    android:textColor="@color/text0"
-                    android:textSize="18sp" />
+                    android:background="@null"
+                    android:gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -345,6 +325,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/carNum_et"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
@@ -384,6 +365,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/thingName_et"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
@@ -413,21 +395,15 @@
                     android:textColor="@color/text10"
                     android:textSize="18sp" />
 
-                <TextView
+                <Spinner
+                    android:id="@+id/spinner_thing_color"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/shape_search2"
-                    android:drawableRight="@mipmap/icon_pull"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="15dp"
-                    android:singleLine="true"
-                    android:text="红色"
-                    android:textColor="@color/text0"
-                    android:textSize="18sp" />
+                    android:background="@null"
+                    android:gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -446,6 +422,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:id="@+id/thingShape_et"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"

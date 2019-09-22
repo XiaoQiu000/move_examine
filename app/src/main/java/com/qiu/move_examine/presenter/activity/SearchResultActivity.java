@@ -1,61 +1,37 @@
-package com.qiu.move_examine.presenter.fragment;
+package com.qiu.move_examine.presenter.activity;
 
-
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import com.qiu.move_examine.R;
-import com.qiu.move_examine.common.AppContext;
-import com.qiu.move_examine.common.ClientConstant;
-import com.qiu.move_examine.common.base.BaseFragment;
+import com.qiu.move_examine.common.base.BaseActivity;
 import com.qiu.move_examine.common.bean.CarBean;
 import com.qiu.move_examine.common.bean.PersonBean;
 import com.qiu.move_examine.common.bean.ThingsBean;
-import com.qiu.move_examine.common.bean.UserInfoBean;
-import com.qiu.move_examine.common.utils.PicassoUtils;
 import com.qiu.move_examine.contract.TargetContract;
 import com.qiu.move_examine.executer.TargetWorker;
-import com.qiu.move_examine.presenter.activity.MainActivity;
-import com.qiu.move_examine.presenter.activity.MessageDetailsActivity;
-import com.qiu.move_examine.presenter.activity.SearchActivity;
-import com.qiu.move_examine.presenter.adapter.MessageAdapter;
 import com.qiu.move_examine.presenter.adapter.TargetAdapter;
 import com.qiu.move_examine.repertory.webservice.response.QueryResponse;
 import com.satsoftec.frame.executer.BaseExecuter;
-import com.satsoftec.frame.util.SharedPreferenceUtil;
 import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- *
- * @author Mr.Qiu
- */
-public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> implements TargetContract.TargetPresenter, View.OnClickListener {
+public class SearchResultActivity extends BaseActivity<TargetContract.TargetExecute> implements TargetContract.TargetPresenter {
+    private static final String TAG = "SearchResultActivity";
+    private String condition;
     private SwipeMenuRecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
     private TargetAdapter adapter;
-    private Button search_bt;
-
     private int page = 1;
     private final int PAGE_SIZE = 10;
-
-    public TargetFragment() {
-    }
-
-
-    @Override
-    protected int getContentRes() {
-        return R.layout.fragment_target;
-    }
 
     @Override
     public TargetContract.TargetExecute initExecutor() {
@@ -64,19 +40,16 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
 
     @Override
     protected void init() {
+        setContent(R.layout.activity_search_result);
+        condition = getIntent().getStringExtra("condition");
         adapter = new TargetAdapter(mContext);
     }
 
     @Override
     protected void initView() {
-        View headView = LayoutInflater.from(mContext).inflate(R.layout.head_target, null, false);
-        recyclerView = findView(R.id.recycleView);
-        refreshLayout = findView(R.id.refresh_swip);
-
-        search_bt = headView.findViewById(R.id.search_bt);
-        search_bt.setOnClickListener(this);
-        recyclerView.addHeaderView(headView);
-
+        setTitle("搜索结果");
+        recyclerView = findViewById(R.id.recycleView);
+        refreshLayout = findViewById(R.id.refresh_swip);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 
         recyclerView.setAdapter(adapter);
@@ -108,26 +81,21 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
 
     @Override
     protected void loadData() {
+        showLoading("正在搜索", new ProgressInterruptListener() {
+            @Override
+            public void onProgressInterruptListener(ProgressDialog progressDialog) {
+                hideLoading();
+            }
+        });
         recyclerView.loadMoreFinish(false, true);
-        executor.loadTargetList("", page, PAGE_SIZE);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.search_bt:
-                Intent intent = new Intent(mContext, SearchActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
+        executor.loadTargetList(condition, page, PAGE_SIZE);
     }
 
     @Override
     public void targetListResult(boolean isok, String msg, QueryResponse res) {
         if (!isok) {
             mContext.showTip(msg);
+            hideLoading();
             return;
         }
         if (page == 1) {
@@ -184,15 +152,15 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
                 adapter.notifyDataSetChanged();
             } else {
                 mContext.showTip("数据请求异常，请重试");
-                hideLoading();
             }
         } else {
             mContext.showTip(res.getError().getMessage());
         }
         if (adapter.getItemCount() == 0) {
-            findView(R.id.no_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.no_view).setVisibility(View.VISIBLE);
         } else {
-            findView(R.id.no_view).setVisibility(View.GONE);
+            findViewById(R.id.no_view).setVisibility(View.GONE);
         }
+        hideLoading();
     }
 }
