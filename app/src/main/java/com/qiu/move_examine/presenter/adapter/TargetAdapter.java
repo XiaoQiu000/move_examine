@@ -69,6 +69,7 @@ public class TargetAdapter extends BaseRcAdapterEx<TargetAdapter.TargetBean, Tar
             default:
                 break;
         }
+        holder.targetTypeTv.setText(bean.getMonitorType());
         switch (bean.getMonitorType()) {
             case "抓捕":
                 holder.targetTypeTv.setBackgroundResource(R.drawable.shape_text_arrest);

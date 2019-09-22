@@ -70,8 +70,8 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
         recyclerView.setSwipeItemClickListener(new SwipeItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                Intent intent = new Intent(mContext, MessageDetailsActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(mContext, MessageDetailsActivity.class);
+//                startActivity(intent);
             }
         });
     }

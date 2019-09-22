@@ -55,6 +55,20 @@ public class CommonService extends BaseWebService {
     }
 
     /**
+     * 消息详情
+     *
+     * @param phone
+     * @param password
+     * @return
+     */
+    public final static String TARGET_DETAILS = "/mobileInventory/pushData/qryInfo";
+
+    public WebTask<QueryResponse> targetDetails(String id) {
+        String condition = "id = '" + id + "'";
+        return queryInterface(TARGET_DETAILS, condition, 0, 0);
+    }
+
+    /**
      * 建立连接接口
      *
      * @return

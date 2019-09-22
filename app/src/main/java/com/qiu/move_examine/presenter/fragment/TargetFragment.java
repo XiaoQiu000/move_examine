@@ -83,7 +83,9 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
         recyclerView.setSwipeItemClickListener(new SwipeItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
+                String id = adapter.getItems().get(position).getId();
                 Intent intent = new Intent(mContext, MessageDetailsActivity.class);
+                intent.putExtra("mId", id);
                 startActivity(intent);
             }
         });

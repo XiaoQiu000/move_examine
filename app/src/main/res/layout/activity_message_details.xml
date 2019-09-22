@@ -21,6 +21,7 @@
             android:background="@mipmap/icon_msg_details">
 
             <ImageView
+                android:id="@+id/coverIv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
@@ -47,14 +48,16 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/nameTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="姓名：翠金报"
+                    android:text="姓名："
                     android:textColor="@color/text0"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/stateTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -76,10 +79,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sexTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="性别：男"
+                    android:text="性别："
                     android:textColor="@color/text0"
                     android:textSize="14sp" />
 
@@ -92,10 +96,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/featureTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="体态：胖"
+                    android:text="体态："
                     android:textColor="@color/text0"
                     android:textSize="14sp" />
 
@@ -108,11 +113,12 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/perNumTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:maxLines="1"
-                    android:text="身份证号：3456712893718923789172"
+                    android:text="身份证号："
                     android:textColor="@color/text0"
                     android:textSize="14sp" />
 
@@ -125,10 +131,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/involveCaseTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="涉及案件：张张头偷东西公务案"
+                    android:text="涉及案件："
                     android:textColor="@color/text0"
                     android:textSize="14sp" />
 
@@ -141,6 +148,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/descriptionTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -173,10 +181,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/unitTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="稽查单位：青岛市城阳分局"
+                    android:text="稽查单位："
                     android:textColor="@color/text0"
                     android:textSize="14sp" />
 
@@ -189,10 +198,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/unitPersonTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="联系人：林警官"
+                    android:text="联系人："
                     android:textColor="@color/text0"
                     android:textSize="14sp" />
 
@@ -205,11 +215,12 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/unitPhoneTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:maxLines="1"
-                    android:text="联系电话：18888888888"
+                    android:text="联系电话："
                     android:textColor="@color/text0"
                     android:textSize="14sp" />
 
