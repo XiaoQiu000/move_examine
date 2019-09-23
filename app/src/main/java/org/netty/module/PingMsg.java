@@ -1,4 +1,4 @@
-package com.qiu.move_examine.netty.module;
+package org.netty.module;
 
 /**
  * 心跳检测消息类型

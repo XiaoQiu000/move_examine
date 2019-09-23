@@ -1,4 +1,4 @@
-package com.qiu.move_examine.netty.module;
+package org.netty.module;
 
 /**
  * 消息类型枚举

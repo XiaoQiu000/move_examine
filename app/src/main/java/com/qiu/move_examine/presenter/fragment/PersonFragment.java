@@ -17,7 +17,7 @@ import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseFragment;
 import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.common.utils.PicassoUtils;
-import com.qiu.move_examine.netty.PushClient;
+import org.netty.PushClient;
 import com.qiu.move_examine.presenter.activity.LoginActivity;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.util.SharedPreferenceUtil;

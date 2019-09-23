@@ -1,21 +1,18 @@
 package com.qiu.move_examine.presenter.activity;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
 import com.qiu.move_examine.R;
-import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.base.BaseActivity;
-import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.common.view.GetTouchRelativeLayout;
-import com.qiu.move_examine.netty.PushClient;
 import com.qiu.move_examine.presenter.fragment.MessageFragment;
 import com.qiu.move_examine.presenter.fragment.PersonFragment;
 import com.qiu.move_examine.presenter.fragment.TargetFragment;
 import com.satsoftec.frame.executer.BaseExecuter;
+
+import org.netty.PushClient;
 
 /**
  * @author Mr.Qiu

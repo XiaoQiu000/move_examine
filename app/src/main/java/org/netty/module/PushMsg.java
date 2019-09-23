@@ -1,4 +1,6 @@
-package com.qiu.move_examine.netty.module;
+package org.netty.module;
+
+import java.util.Map;
 
 /**
  * ������Ϣ����
@@ -10,6 +12,7 @@ public class PushMsg extends BaseMsg {
 
     private String title;
     private String content;
+    private String extMap;
 
     public PushMsg() {
         super();
@@ -32,4 +35,11 @@ public class PushMsg extends BaseMsg {
         this.content = content;
     }
 
+    public String getExtMap() {
+        return extMap;
+    }
+
+    public void setExtMap(String extMap) {
+        this.extMap = extMap;
+    }
 }

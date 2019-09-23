@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.qiu.move_examine.common.AppContext;
-import com.qiu.move_examine.netty.PushClient;
+import org.netty.PushClient;
 
 import java.util.ArrayList;
 import java.util.Iterator;

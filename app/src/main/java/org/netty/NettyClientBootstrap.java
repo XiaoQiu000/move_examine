@@ -1,4 +1,4 @@
-package com.qiu.move_examine.netty;
+package org.netty;
 
 
 import android.util.Log;
@@ -6,8 +6,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.bean.UserInfoBean;
-import com.qiu.move_examine.netty.module.Constants;
-import com.qiu.move_examine.netty.module.LoginMsg;
+
+import org.netty.module.Constants;
+import org.netty.module.LoginMsg;
 
 import java.net.InetSocketAddress;
 

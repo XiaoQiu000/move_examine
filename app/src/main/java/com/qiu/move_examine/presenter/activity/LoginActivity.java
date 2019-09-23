@@ -3,7 +3,6 @@ package com.qiu.move_examine.presenter.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,8 +15,8 @@ import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.common.utils.ActionBarUtils;
 import com.qiu.move_examine.contract.LoginContract;
 import com.qiu.move_examine.executer.LoginWorker;
-import com.qiu.move_examine.netty.PushClient;
-import com.qiu.move_examine.repertory.webservice.request.QueryRequest;
+import org.netty.PushClient;
+
 import com.qiu.move_examine.repertory.webservice.response.ConnectResponse;
 import com.qiu.move_examine.repertory.webservice.response.QueryResponse;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
@@ -42,6 +41,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     protected void init() {
         setContent(R.layout.activity_login);
         fromExtra = getIntent().getBooleanExtra(ClientConstant.SPREFERENCES_LOGIN_EXIT, false);
+
     }
 
     @Override

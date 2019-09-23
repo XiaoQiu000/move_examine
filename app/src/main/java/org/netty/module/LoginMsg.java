@@ -1,4 +1,4 @@
-package com.qiu.move_examine.netty.module;
+package org.netty.module;
 
 /**
  * 登录验证消息类型
