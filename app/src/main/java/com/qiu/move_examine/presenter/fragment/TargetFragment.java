@@ -2,12 +2,18 @@ package com.qiu.move_examine.presenter.fragment;
 
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.qiu.move_examine.R;
@@ -44,6 +50,8 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
     private SwipeRefreshLayout refreshLayout;
     private TargetAdapter adapter;
     private Button search_bt;
+    private EditText search_et;
+    private String keyWord = "";
 
     private int page = 1;
     private final int PAGE_SIZE = 10;
@@ -74,11 +82,10 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
         refreshLayout = findView(R.id.refresh_swip);
 
         search_bt = headView.findViewById(R.id.search_bt);
+        search_et = headView.findViewById(R.id.search_et);
         search_bt.setOnClickListener(this);
         recyclerView.addHeaderView(headView);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-
         recyclerView.setAdapter(adapter);
         recyclerView.setSwipeItemClickListener(new SwipeItemClickListener() {
             @Override
@@ -104,12 +111,39 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
             }
         });
         recyclerView.loadMoreFinish(false, true);
+
+        search_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (mHandler.hasMessages(1)) {
+                    mHandler.removeMessages(1);
+                }
+                keyWord = s.toString();
+                mHandler.sendEmptyMessageDelayed(1, 1000);
+            }
+        });
     }
 
     @Override
     protected void loadData() {
         recyclerView.loadMoreFinish(false, true);
-        executor.loadTargetList("", page, PAGE_SIZE);
+        String condition = "";
+        if (!TextUtils.isEmpty(keyWord)) {
+            condition = "(INVOLVE_CASE like '%" + keyWord + "%' or CHARACTER_DESCRIPTION like '%" + keyWord +
+                    "%' or BRAND = '%" + keyWord + "%' or ITEMS = '%" + keyWord + "%' or PER_NAME = '%" + keyWord
+                    + "%')";
+        }
+        executor.loadTargetList(condition, page, PAGE_SIZE);
     }
 
     @Override
@@ -195,4 +229,13 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
             findView(R.id.no_view).setVisibility(View.GONE);
         }
     }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                loadData();
+            }
+        }
+    };
 }
