@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.qiu.move_examine.common.AppContext;
+import com.qiu.move_examine.netty.PushClient;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,6 +35,7 @@ public class ApplicationEx extends Application {
     public void onCreate() {
         super.onCreate();
         activities = new ArrayList<>();
+        PushClient.create();
         AppContext.self().init(this);
     }
 

@@ -16,6 +16,7 @@ import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.common.utils.ActionBarUtils;
 import com.qiu.move_examine.contract.LoginContract;
 import com.qiu.move_examine.executer.LoginWorker;
+import com.qiu.move_examine.netty.PushClient;
 import com.qiu.move_examine.repertory.webservice.request.QueryRequest;
 import com.qiu.move_examine.repertory.webservice.response.ConnectResponse;
 import com.qiu.move_examine.repertory.webservice.response.QueryResponse;
@@ -194,6 +195,9 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     @Override
     public void loginResult(boolean isok, String msg, QueryResponse res, String account, String password) {
         if (!isok) {
+            findViewById(R.id.welcomeTv).setVisibility(View.GONE);
+            findViewById(R.id.login_input).setVisibility(View.VISIBLE);
+            bt_login.setEnabled(true);
             showTip(msg);
             hideLoading();
             return;
@@ -210,6 +214,8 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
                 userInfoBean.setPerIcon(fieldValues.get(2).getValue());
                 userInfoBean.setInspectionUnit(fieldValues.get(3).getValue());
                 userInfoBean.setPerTel(fieldValues.get(4).getValue());
+                userInfoBean.setPerNo(account);
+                userInfoBean.setPerPwd(password);
                 AppContext.self().setUserInfo(userInfoBean);
                 startActivity(new Intent(mContext, MainActivity.class));
                 finish();
@@ -218,6 +224,9 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
                 hideLoading();
             }
         } else {
+            findViewById(R.id.welcomeTv).setVisibility(View.GONE);
+            findViewById(R.id.login_input).setVisibility(View.VISIBLE);
+            bt_login.setEnabled(true);
             showTip(res.getError().getMessage());
             hideLoading();
         }

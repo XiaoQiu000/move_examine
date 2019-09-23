@@ -17,6 +17,7 @@ import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseFragment;
 import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.common.utils.PicassoUtils;
+import com.qiu.move_examine.netty.PushClient;
 import com.qiu.move_examine.presenter.activity.LoginActivity;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
@@ -93,6 +94,8 @@ public class PersonFragment extends BaseFragment {
         SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, false);
         getApplicationEx().closeAllActivity();
         AppContext.self().setUserInfo(null);
+        //关闭长连接
+        PushClient.close();
         //开启登录界面
         Intent intent = new Intent(mContext, LoginActivity.class);
         intent.putExtra(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);
