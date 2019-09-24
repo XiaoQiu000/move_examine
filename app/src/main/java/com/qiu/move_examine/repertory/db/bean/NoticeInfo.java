@@ -7,27 +7,28 @@ import com.satsoftec.frame.repertory.dbTool.Table;
  * @author Mr.Qiu
  * @date 2019/09/12
  */
-@Table(name = "MessageInfo")
-public class MessageInfo extends BaseEntity {
-    private Long ownerId;
-    private Long noticeId;
+@Table(name = "NoticeInfo")
+public class NoticeInfo extends BaseEntity {
+    private String ownerId;
+    private int noticeId;
     private String title;
     private String content;
+    private String extMap;
     private Boolean noticeHaveRead;
 
-    public Long getOwnerId() {
+    public String getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(Long ownerId) {
+    public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }
 
-    public Long getNoticeId() {
+    public int getNoticeId() {
         return noticeId;
     }
 
-    public void setNoticeId(Long noticeId) {
+    public void setNoticeId(int noticeId) {
         this.noticeId = noticeId;
     }
 
@@ -45,6 +46,14 @@ public class MessageInfo extends BaseEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getExtMap() {
+        return extMap;
+    }
+
+    public void setExtMap(String extMap) {
+        this.extMap = extMap;
     }
 
     public Boolean getNoticeHaveRead() {

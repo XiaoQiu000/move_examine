@@ -2,6 +2,7 @@ package com.qiu.move_examine.presenter.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,6 +39,11 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
     protected void init() {
         setContent(R.layout.activity_message_details);
         mId = getIntent().getStringExtra("mId");
+        if (TextUtils.isEmpty(mId)) {
+            showTip("发生错误");
+            finish();
+            return;
+        }
     }
 
     @Override
