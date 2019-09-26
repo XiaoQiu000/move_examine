@@ -23,7 +23,7 @@ public class AppWsInfo extends WebServiceInfo {
         };
     }
 
-    private static final String SERVEL_URL = "http://47.98.216.253:80";
+    private static final String SERVEL_URL = "http://192.168.0.111:8080";
 
     @Override
     public String getServerUrl() {

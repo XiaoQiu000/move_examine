@@ -34,7 +34,7 @@ import io.netty.util.concurrent.EventExecutorGroup;
 public class NettyClientBootstrap {
     private static final String TAG = "NettyClientBootstrap";
     private int port = 9999;
-    private String host = "47.98.216.253";
+    private String host = "192.168.0.111";
     public SocketChannel socketChannel;
     private static final EventExecutorGroup group = new DefaultEventExecutorGroup(20);
 
