@@ -39,25 +39,24 @@ public class NettyClientBootstrap {
     private static final EventExecutorGroup group = new DefaultEventExecutorGroup(20);
 
     public void startNetty() throws InterruptedException {
-        UserInfoBean userInfo = AppContext.self().getUserInfo();
 
-        if (socketChannel != null && socketChannel.isOpen()) {
-            System.out.println("已经连接");
-        } else {
-            Constants.setClientId(userInfo.getId());
-            System.out.println("长链接开始");
-            if (start()) {
-                LoginMsg loginMsg = new LoginMsg();
-                loginMsg.setPassword(userInfo.getPerPwd());
-                loginMsg.setUserName(userInfo.getPerNo());
-                String s = new Gson().toJson(loginMsg);
-                Log.e(TAG, "startNetty: " + s);
-                socketChannel.writeAndFlush(loginMsg);
-                System.out.println("长链接成功");
-            } else {
-                System.out.println("长链接失败...");
-            }
-        }
+//        if (socketChannel != null && socketChannel.isOpen()) {
+//            System.out.println("已经连接");
+//        } else {
+//            Constants.setClientId(userInfo.getId());
+//            System.out.println("长链接开始");
+//            if (start()) {
+//                LoginMsg loginMsg = new LoginMsg();
+//                loginMsg.setPassword(userInfo.getPerPwd());
+//                loginMsg.setUserName(userInfo.getPerNo());
+//                String s = new Gson().toJson(loginMsg);
+//                Log.e(TAG, "startNetty: " + s);
+//                socketChannel.writeAndFlush(loginMsg);
+//                System.out.println("长链接成功");
+//            } else {
+//                System.out.println("长链接失败...");
+//            }
+//        }
     }
 
     private Boolean start() throws InterruptedException {

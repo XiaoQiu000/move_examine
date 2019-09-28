@@ -3,13 +3,18 @@ package com.qiu.move_examine.presenter.fragment;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.Person;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.AppContext;
+import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseFragment;
+import com.qiu.move_examine.common.bean.CarBean;
+import com.qiu.move_examine.common.bean.PersonBean;
+import com.qiu.move_examine.common.bean.ThingsBean;
 import com.qiu.move_examine.contract.MessageContract;
 import com.qiu.move_examine.executer.MessageWorker;
 import com.qiu.move_examine.presenter.activity.MessageDetailsActivity;
@@ -18,6 +23,7 @@ import com.qiu.move_examine.presenter.event.NoticeEvent;
 import com.qiu.move_examine.repertory.db.bean.NoticeInfo;
 import com.satsoftec.frame.SFrame;
 import com.satsoftec.frame.repertory.dbTool.DatabaseManage;
+import com.satsoftec.frame.util.SharedPreferenceUtil;
 import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
@@ -73,10 +79,11 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
         recyclerView.setSwipeItemClickListener(new SwipeItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
+                String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
                 MessageAdapter.MessageBean messageBean = adapter.getItems().get(position);
-                NoticeInfo noticeInfo = DatabaseManage.getBean(NoticeInfo.class, "ownerId = '" + AppContext.self().getUserInfo().getId() + "' and noticeId = " + messageBean.getId());
+                NoticeInfo noticeInfo = DatabaseManage.getBean(NoticeInfo.class, "ownerId = '" + userId + "' and noticeId = " + messageBean.getId());
                 noticeInfo.setNoticeHaveRead(true);
-                DatabaseManage.update(noticeInfo, "ownerId = '" + AppContext.self().getUserInfo().getId() + "' and noticeId=" + messageBean.getId());
+                DatabaseManage.update(noticeInfo, "ownerId = '" + userId + "' and noticeId=" + messageBean.getId());
 
                 Intent intent = new Intent(mContext, MessageDetailsActivity.class);
                 intent.putExtra("mId", messageBean.getId() + "");
@@ -95,7 +102,15 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
         adapter.clear();
         for (int i = 0; i < list.size(); i++) {
             NoticeInfo noticeInfo = list.get(i);
-            MessageAdapter.MessageBean mBean = SFrame.getGson().fromJson(noticeInfo.getExtMap(), MessageAdapter.MessageBean.class);
+            MessageAdapter.MessageBean mBean = new MessageAdapter.MessageBean();
+            mBean.setId(noticeInfo.getNoticeId());
+            mBean.setTargetType(noticeInfo.getTargetType());
+            mBean.setMonitorType(noticeInfo.getMonitorType());
+            mBean.setCover(noticeInfo.getCover());
+            mBean.setPushTime(noticeInfo.getPushTime());
+            mBean.setPerson(SFrame.getGson().fromJson(noticeInfo.getPerson(), PersonBean.class));
+            mBean.setCar(SFrame.getGson().fromJson(noticeInfo.getCar(), CarBean.class));
+            mBean.setThings(SFrame.getGson().fromJson(noticeInfo.getPerson(), ThingsBean.class));
             mBean.setRead(noticeInfo.getNoticeHaveRead());
             adapter.addItem(mBean);
         }

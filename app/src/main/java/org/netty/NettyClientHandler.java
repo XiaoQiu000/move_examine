@@ -92,32 +92,29 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<BaseMsg> {
     protected void messageReceived(ChannelHandlerContext channelHandlerContext, BaseMsg baseMsg) throws Exception {
         switch (baseMsg.getType()) {
             case LOGIN:
-                UserInfoBean userInfo = AppContext.self().getUserInfo();
-                //向服务器发起登录
-                LoginMsg loginMsg = new LoginMsg();
-                loginMsg.setPassword(userInfo.getPerPwd());
-                loginMsg.setUserName(userInfo.getPerNo());
-                channelHandlerContext.writeAndFlush(loginMsg);
+//                UserInfoBean userInfo = AppContext.userInfo;
+//                //向服务器发起登录
+//                LoginMsg loginMsg = new LoginMsg();
+//                loginMsg.setPassword(userInfo.getPerPwd());
+//                loginMsg.setUserName(userInfo.getPerNo());
+//                channelHandlerContext.writeAndFlush(loginMsg);
                 break;
             case PING:
                 System.out.println("receive ping from server----------");
                 break;
             case PUSH:
 
-                PushMsg pushMsg = (PushMsg) baseMsg;
-                Log.e(TAG, "messageReceived: 收到通知" + pushMsg.getExtMap());
-                NoticeBean json = SFrame.getGson().fromJson(pushMsg.getExtMap(), NoticeBean.class);
-
-                NoticeInfo noticeInfo = new NoticeInfo();
-                noticeInfo.setOwnerId(AppContext.self().getUserInfo().getId());
-                noticeInfo.setNoticeId(json.getId());
-                noticeInfo.setTitle(pushMsg.getTitle());
-                noticeInfo.setContent(pushMsg.getContent());
-                noticeInfo.setExtMap(pushMsg.getExtMap());
-                noticeInfo.setNoticeHaveRead(false);
-                DatabaseManage.insert(noticeInfo);
-                EventBus.getDefault().post(new NoticeEvent());
-                notification(AppContext.self().getApplication(), pushMsg.getTitle(), pushMsg.getContent());
+//                PushMsg pushMsg = (PushMsg) baseMsg;
+//                Log.e(TAG, "messageReceived: 收到通知" + pushMsg.getExtMap());
+//                NoticeBean json = SFrame.getGson().fromJson(pushMsg.getExtMap(), NoticeBean.class);
+//
+//                NoticeInfo noticeInfo = new NoticeInfo();
+//                noticeInfo.setOwnerId(AppContext.userInfo.getId());
+//                noticeInfo.setNoticeId(json.getId());
+//                noticeInfo.setNoticeHaveRead(false);
+//                DatabaseManage.insert(noticeInfo);
+//                EventBus.getDefault().post(new NoticeEvent());
+//                notification(AppContext.self().getApplication(), pushMsg.getTitle(), pushMsg.getContent());
                 break;
             default:
                 System.out.println("default..");

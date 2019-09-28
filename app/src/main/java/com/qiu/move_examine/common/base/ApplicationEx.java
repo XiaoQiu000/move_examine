@@ -35,7 +35,7 @@ public class ApplicationEx extends Application {
     public void onCreate() {
         super.onCreate();
         activities = new ArrayList<>();
-        PushClient.create();
+//        PushClient.create();
         AppContext.self().init(this);
     }
 

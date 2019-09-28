@@ -60,8 +60,6 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         et_password.setOnFocusChangeListener(this);
         et_account.clearFocus();
         et_password.clearFocus();
-
-
     }
 
     @Override
@@ -204,19 +202,15 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         }
         if (res.getResult() != null) {
             if (res.getResult().getCode().equals("1")) {
+
+                List<QueryResponse.ResultBean.DataBean.FieldValuesBean> fieldValues = res.getResult().getData().get(0).getFieldValues();
                 SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);
+                SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID, fieldValues.get(0).getValue());
+                SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_NAME, fieldValues.get(1).getValue());
+                SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_INSPECTIONUNIT, fieldValues.get(3).getValue());
+                SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_COVER, fieldValues.get(2).getValue());
                 SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT, account);
                 SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD, password);
-                List<QueryResponse.ResultBean.DataBean.FieldValuesBean> fieldValues = res.getResult().getData().get(0).getFieldValues();
-                UserInfoBean userInfoBean = new UserInfoBean();
-                userInfoBean.setId(fieldValues.get(0).getValue());
-                userInfoBean.setPerName(fieldValues.get(1).getValue());
-                userInfoBean.setPerIcon(fieldValues.get(2).getValue());
-                userInfoBean.setInspectionUnit(fieldValues.get(3).getValue());
-                userInfoBean.setPerTel(fieldValues.get(4).getValue());
-                userInfoBean.setPerNo(account);
-                userInfoBean.setPerPwd(password);
-                AppContext.self().setUserInfo(userInfoBean);
                 startActivity(new Intent(mContext, MainActivity.class));
                 finish();
             } else {

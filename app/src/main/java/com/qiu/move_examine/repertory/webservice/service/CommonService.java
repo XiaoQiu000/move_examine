@@ -12,6 +12,7 @@ import com.qiu.move_examine.repertory.webservice.response.OperateResponse;
 import com.qiu.move_examine.repertory.webservice.response.QueryResponse;
 import com.satsoftec.frame.repertory.remote.BaseWebService;
 import com.satsoftec.frame.repertory.remote.WebTask;
+import com.satsoftec.frame.util.SharedPreferenceUtil;
 
 /**
  * @author Mr.Qiu
@@ -29,42 +30,42 @@ public class CommonService extends BaseWebService {
     /**
      * 通过账号密码登录
      *
-     * @param phone
+     * @param account
      * @param password
      * @return
      */
-    public final static String USER_LOGIN_BY_ACCOUNT = "/mobileInventory/login/loginApp";
-
     public WebTask<QueryResponse> userLoginByPhone(String account, String password) {
         String condition = "PER_NO = '" + account + "' and PER_PWD = '" + password + "'";
-        return queryInterface(USER_LOGIN_BY_ACCOUNT, condition, 0, 0);
+        return queryInterface(condition, "loginApp", 0, 0);
     }
 
     /**
      * 查询目标库列表
      *
-     * @param phone
-     * @param password
      * @return
      */
-    public final static String TARGET_LIST = "/mobileInventory/pushData/qryAll";
-
     public WebTask<QueryResponse> targetList(String condition, int page, int pageSize) {
-        return queryInterface(TARGET_LIST, condition, page, pageSize);
+        return queryInterface(condition, "pushDataQryAll", page, pageSize);
+    }
+
+    /**
+     * 推送消息查询
+     *
+     * @return
+     */
+    public WebTask<QueryResponse> pushList() {
+        return queryInterface("", "pushDataQryUnPush", 0, 0);
     }
 
     /**
      * 消息详情
      *
-     * @param phone
-     * @param password
      * @return
      */
-    public final static String TARGET_DETAILS = "/mobileInventory/pushData/qryInfo";
 
     public WebTask<QueryResponse> targetDetails(String id) {
         String condition = "id = '" + id + "'";
-        return queryInterface(TARGET_DETAILS, condition, 0, 0);
+        return queryInterface(condition, "pushDataQryInfo", 0, 0);
     }
 
     /**
@@ -72,8 +73,6 @@ public class CommonService extends BaseWebService {
      *
      * @return
      */
-    public final static String CONNECT_METHOD = "/dataRequ/connect";
-
     public WebTask<ConnectResponse> connectInterface() {
         ConnectRequest request = new ConnectRequest();
         request.setId(ID);
@@ -88,7 +87,7 @@ public class CommonService extends BaseWebService {
         pb.setData(cpd);
         pb.setSign("");
         request.setParams(pb);
-        return request(CONNECT_METHOD, request, null, ConnectResponse.class);
+        return request("", request, null, ConnectResponse.class);
     }
 
     /**
@@ -97,8 +96,10 @@ public class CommonService extends BaseWebService {
      * @param condition 查询条件
      * @return
      */
-    public WebTask<QueryResponse> queryInterface(String url, String condition, int page, int pageSize) {
-        UserInfoBean userInfo = AppContext.self().getUserInfo();
+    public WebTask<QueryResponse> queryInterface(String condition, String dataObjId, int page, int pageSize) {
+        String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
+        String perName = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_NAME);
+        String perNo = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT);
         QueryRequest request = new QueryRequest();
         request.setId(ID);
         request.setJsonrpc(JSONRPC);
@@ -108,9 +109,9 @@ public class CommonService extends BaseWebService {
         cpd.setVersion(VERSON);
         cpd.setSessionId(ClientConstant.sessionId);
         QueryRequest.ParamsBean.DataBean.UserInfoBean uib = new QueryRequest.ParamsBean.DataBean.UserInfoBean();
-        uib.setUserId(userInfo == null ? "" : (userInfo.getId() + ""));
-        uib.setUserName(userInfo == null ? "" : (userInfo.getPerName() + ""));
-        uib.setUserDeptNo(userInfo == null ? "" : (userInfo.getPerNo() + ""));
+        uib.setUserId(userId == null ? "" : (userId + ""));
+        uib.setUserName(perName);
+        uib.setUserDeptNo(perNo);
         uib.setSn(SN);
         uib.setSfzh("");
         QueryRequest.ParamsBean.DataBean.UserInfoBean.ExtAttrBean eab = new QueryRequest.ParamsBean.DataBean.UserInfoBean.ExtAttrBean();
@@ -119,7 +120,7 @@ public class CommonService extends BaseWebService {
         QueryRequest.ParamsBean.DataBean.SourceBean sb = new QueryRequest.ParamsBean.DataBean.SourceBean();
         sb.setSourceId("DS-01,DS-02");
         cpd.setSource(sb);
-        cpd.setDataObjId("cthr");
+        cpd.setDataObjId(dataObjId);
         cpd.setCondition(condition);
         cpd.setFields("");
         cpd.setOrderBy("");
@@ -130,6 +131,6 @@ public class CommonService extends BaseWebService {
         pb.setData(cpd);
         pb.setSign("");
         request.setParams(pb);
-        return request(url, request, null, QueryResponse.class);
+        return request("", request, null, QueryResponse.class);
     }
 }

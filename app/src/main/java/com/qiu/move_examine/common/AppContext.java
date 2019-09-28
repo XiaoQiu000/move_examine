@@ -30,7 +30,6 @@ import java.io.File;
 public class AppContext implements SDatabaseDeclare, SWebServiceDeclare, SAppDeclare {
     private static AppContext self;
     private ApplicationEx application;
-    private UserInfoBean userInfo;
 
     private AppContext() {
     }
@@ -54,14 +53,6 @@ public class AppContext implements SDatabaseDeclare, SWebServiceDeclare, SAppDec
             cacheDir = this.application.getCacheDir();
         }
         SFrame.init(this);
-    }
-
-    public UserInfoBean getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(UserInfoBean userInfo) {
-        this.userInfo = userInfo;
     }
 
     @Override

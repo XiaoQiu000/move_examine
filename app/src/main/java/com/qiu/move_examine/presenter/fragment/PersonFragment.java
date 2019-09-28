@@ -73,10 +73,12 @@ public class PersonFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
-        UserInfoBean userInfo = AppContext.self().getUserInfo();
-        tv_inspectionUnit.setText(TextUtils.isEmpty(userInfo.getInspectionUnit()) ? "" : userInfo.getInspectionUnit());
-        tv_perName.setText(TextUtils.isEmpty(userInfo.getPerName()) ? "" : userInfo.getPerName());
-        PicassoUtils.getinstance().loadImage(mContext, userInfo.getPerIcon(), iv_head,
+        String perName = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_NAME);
+        String isp = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_INSPECTIONUNIT);
+        String cover = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_COVER);
+        tv_inspectionUnit.setText(isp);
+        tv_perName.setText(perName);
+        PicassoUtils.getinstance().loadImage(mContext, cover, iv_head,
                 R.mipmap.icon_person_head);
     }
 
@@ -93,9 +95,8 @@ public class PersonFragment extends BaseFragment {
     public void logout() {
         SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, false);
         getApplicationEx().closeAllActivity();
-        AppContext.self().setUserInfo(null);
-        //关闭长连接
-        PushClient.close();
+//        //关闭长连接
+//        PushClient.close();
         //开启登录界面
         Intent intent = new Intent(mContext, LoginActivity.class);
         intent.putExtra(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);

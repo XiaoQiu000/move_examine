@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.qiu.move_examine.R;
@@ -51,6 +52,9 @@ public class PicassoUtils {
     }
 
     public void loadImage(Context context, String path, ImageView imageView, int placeholderimage) {
+        if (TextUtils.isEmpty(path)) {
+            path = null;
+        }
         Picasso.with(context).load(path).placeholder(placeholderimage).into(imageView);
     }
 

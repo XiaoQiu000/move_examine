@@ -1,5 +1,6 @@
 package com.qiu.move_examine.presenter.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.RadioButton;
@@ -119,6 +120,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void loadData() {
-        PushClient.start();
+//        PushClient.start();
+        Intent intent = new Intent();
+        intent.setPackage("com.qiu.move_examine");
+        intent.setAction("com.cyapp.mynotice");
+        sendBroadcast(intent);
     }
 }

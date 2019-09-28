@@ -39,6 +39,7 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
     protected void init() {
         setContent(R.layout.activity_message_details);
         mId = getIntent().getStringExtra("mId");
+
         if (TextUtils.isEmpty(mId)) {
             showTip("发生错误");
             finish();
