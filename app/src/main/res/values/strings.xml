@@ -23,7 +23,23 @@
 
     <string-array name="car_name_array">
         <item>丰田-汉兰达</item>
-        <item>奔驰-200</item>
+        <item>凯迪拉克</item>
+        <item>别克</item>
+        <item>大众</item>
+        <item>丰田</item>
+        <item>雪佛兰</item>
+        <item>现代</item>
+        <item>吉利</item>
+        <item>捷豹</item>
+        <item>马自达</item>
+        <item>五菱</item>
+        <item>保时捷</item>
+        <item>奔驰</item>
+        <item>宝马</item>
+        <item>福特</item>
+        <item>奥迪</item>
+        <item>红旗</item>
+        <item>吉普</item>
     </string-array>
 
     <string-array name="car_name_color">

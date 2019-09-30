@@ -189,7 +189,7 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                         break;
                 }
                 condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
-                        (TextUtils.isEmpty(perName) ? "" : "' and per_name like '" + perName) +
+                        (TextUtils.isEmpty(perName) ? "" : "' and per_name like '%" + perName + "%") +
                         (TextUtils.isEmpty(perIdNo) ? "" : "' and per_id_no = '" + perIdNo) +
                         "' and per_sex = '" + perSex + "' and per_figure = '" + perFigure + "'";
                 break;
@@ -200,7 +200,7 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
 
                 condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
                         (TextUtils.isEmpty(carNo) ? "" : "' and car_no = '" + carNo) +
-                        "' and brand like '" + brand + "' and color = '" + carColor + "'";
+                        "' and brand like '" + brand + "%" + "' and color = '" + carColor + "'";
                 break;
             case "03":
                 String thingName = thingName_et.getText().toString();
@@ -208,7 +208,7 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                 String thingColor = ((TextView) spinner_thing_color.getSelectedView().findViewById(R.id.text1)).getText().toString();
 
                 condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
-                        (TextUtils.isEmpty(thingName) ? "" : "' and items like '" + thingName) +
+                        (TextUtils.isEmpty(thingName) ? "" : "' and items like '%" + thingName + "%") +
                         (TextUtils.isEmpty(thingShape) ? "" : "' and shape = '" + thingShape) +
                         "' and color = '" + thingColor + "'";
                 break;
