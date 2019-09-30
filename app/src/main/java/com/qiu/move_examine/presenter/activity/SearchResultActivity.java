@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.qiu.move_examine.R;
+import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.base.BaseActivity;
 import com.qiu.move_examine.common.bean.CarBean;
 import com.qiu.move_examine.common.bean.PersonBean;
@@ -150,6 +151,9 @@ public class SearchResultActivity extends BaseActivity<TargetContract.TargetExec
                     adapter.addItem(tb);
                 }
                 adapter.notifyDataSetChanged();
+            }else if (res.getResult().getCode().equals("2")) {
+                showTip("会话超时");
+                AppContext.self().logout(mContext);
             } else {
                 mContext.showTip("数据请求异常，请重试");
             }

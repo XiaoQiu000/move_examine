@@ -1,11 +1,14 @@
 package com.qiu.move_examine.common;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.qiu.move_examine.common.base.ApplicationEx;
+import com.qiu.move_examine.common.base.BaseActivity;
 import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.presenter.activity.LoginActivity;
 import com.qiu.move_examine.repertory.db.AppDbInfo;
@@ -68,6 +71,21 @@ public class AppContext implements SDatabaseDeclare, SWebServiceDeclare, SAppDec
     @Override
     public Application getApplication() {
         return this.application;
+    }
+
+    /**
+     * 退出登录
+     */
+    public void logout(BaseActivity context) {
+        SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, false);
+        ((ApplicationEx) AppContext.self().getApplication()).closeAllActivity();
+//        //关闭长连接
+//        PushClient.close();
+        //开启登录界面
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.putExtra(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
 }

@@ -63,7 +63,7 @@ public class PersonFragment extends BaseFragment {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.exitLogin:
-                        logout();
+                        AppContext.self().logout(mContext);
                         break;
                 }
                 return false;
@@ -87,21 +87,6 @@ public class PersonFragment extends BaseFragment {
         inflater.inflate(R.menu.menu_person, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
-    }
-
-    /**
-     * 退出登录
-     */
-    public void logout() {
-        SharedPreferenceUtil.saveSharedPreBoolean(ClientConstant.SPREFERENCES_LOGIN_EXIT, false);
-        getApplicationEx().closeAllActivity();
-//        //关闭长连接
-//        PushClient.close();
-        //开启登录界面
-        Intent intent = new Intent(mContext, LoginActivity.class);
-        intent.putExtra(ClientConstant.SPREFERENCES_LOGIN_EXIT, true);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
 }

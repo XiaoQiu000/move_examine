@@ -3,6 +3,7 @@ package com.qiu.move_examine.repertory.webservice.service;
 import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.bean.UserInfoBean;
+import com.qiu.move_examine.common.utils.DataUtils;
 import com.qiu.move_examine.common.utils.RandomUtils;
 import com.qiu.move_examine.repertory.webservice.request.ConnectRequest;
 import com.qiu.move_examine.repertory.webservice.request.OperateRequest;
@@ -22,9 +23,9 @@ public class CommonService extends BaseWebService {
      * 接口请求相关参数
      */
     public final static String ID = "1";
-    public final static String APPID = "APPID";//资源服务提供方 ID
+    public final static String APPID = "720e9b57972f4fc899158ccfa4b5a7e5";//资源服务提供方 ID
     public final static String JSONRPC = "2.0";
-    public final static String VERSON = "20190925";//协议版本号
+    public final static String VERSON = "20180523";//协议版本号
     public final static String SN = "";//证书SN
 
     /**
@@ -35,8 +36,8 @@ public class CommonService extends BaseWebService {
      * @return
      */
     public WebTask<QueryResponse> userLoginByPhone(String account, String password) {
-        String condition = "PER_NO = '" + account + "' and PER_PWD = '" + password + "'";
-        return queryInterface(condition, "loginApp", 0, 0);
+        String condition = "per_no = '" + account + "' and per_pwd = '" + password + "'";
+        return queryInterface(condition, "loginapp", 1, 1);
     }
 
     /**
@@ -45,7 +46,7 @@ public class CommonService extends BaseWebService {
      * @return
      */
     public WebTask<QueryResponse> targetList(String condition, int page, int pageSize) {
-        return queryInterface(condition, "pushDataQryAll", page, pageSize);
+        return queryInterface(condition, "pushdataqryall", page, pageSize);
     }
 
     /**
@@ -54,7 +55,7 @@ public class CommonService extends BaseWebService {
      * @return
      */
     public WebTask<QueryResponse> pushList() {
-        return queryInterface("", "pushDataQryUnPush", 0, 0);
+        return queryInterface("", "pushdataqryunpush", 1, 1);
     }
 
     /**
@@ -65,7 +66,7 @@ public class CommonService extends BaseWebService {
 
     public WebTask<QueryResponse> targetDetails(String id) {
         String condition = "id = '" + id + "'";
-        return queryInterface(condition, "pushDataQryInfo", 0, 0);
+        return queryInterface(condition, "pushdataqryinfo", 1, 1);
     }
 
     /**
@@ -82,7 +83,7 @@ public class CommonService extends BaseWebService {
         ConnectRequest.ParamsBean.DataBean cpd = new ConnectRequest.ParamsBean.DataBean();
         cpd.setVersion(VERSON);
         cpd.setAppId(APPID);
-        cpd.setTimestamp(System.currentTimeMillis() + "");
+        cpd.setTimestamp(DataUtils.getStringDate());
         cpd.setNonce(RandomUtils.getRandomString(26));
         pb.setData(cpd);
         pb.setSign("");
@@ -118,7 +119,7 @@ public class CommonService extends BaseWebService {
         uib.setExtAttr(eab);
         cpd.setUserInfo(uib);
         QueryRequest.ParamsBean.DataBean.SourceBean sb = new QueryRequest.ParamsBean.DataBean.SourceBean();
-        sb.setSourceId("DS-01,DS-02");
+        sb.setSourceId("DS-00000008");
         cpd.setSource(sb);
         cpd.setDataObjId(dataObjId);
         cpd.setCondition(condition);

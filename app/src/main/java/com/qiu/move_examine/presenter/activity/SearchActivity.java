@@ -188,29 +188,29 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                     default:
                         break;
                 }
-                condition = "TARGET_TYPE = '" + targetType + "' and MONITOR_TYPE = '" + monitorType +
-                        (TextUtils.isEmpty(perName) ? "" : "' and PER_NAME = '" + perName) +
-                        (TextUtils.isEmpty(perIdNo) ? "" : "' and PER_ID_NO = '" + perIdNo) +
-                        "' and PER_SEX = '" + perSex + "' and PER_FIGURE = '" + perFigure + "'";
+                condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
+                        (TextUtils.isEmpty(perName) ? "" : "' and per_name like '" + perName) +
+                        (TextUtils.isEmpty(perIdNo) ? "" : "' and per_id_no = '" + perIdNo) +
+                        "' and per_sex = '" + perSex + "' and per_figure = '" + perFigure + "'";
                 break;
             case "02":
                 String carNo = carNum_et.getText().toString();
                 String brand = ((TextView) spinner_car_name.getSelectedView().findViewById(R.id.text1)).getText().toString();
                 String carColor = ((TextView) spinner_car_color.getSelectedView().findViewById(R.id.text1)).getText().toString();
 
-                condition = "TARGET_TYPE = '" + targetType + "' and MONITOR_TYPE = '" + monitorType +
-                        (TextUtils.isEmpty(carNo) ? "" : "' and CAR_NO = '" + carNo) +
-                        "' and BRAND = '" + brand + "' and COLOR = '" + carColor + "'";
+                condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
+                        (TextUtils.isEmpty(carNo) ? "" : "' and car_no = '" + carNo) +
+                        "' and brand like '" + brand + "' and color = '" + carColor + "'";
                 break;
             case "03":
                 String thingName = thingName_et.getText().toString();
                 String thingShape = thingShape_et.getText().toString();
                 String thingColor = ((TextView) spinner_thing_color.getSelectedView().findViewById(R.id.text1)).getText().toString();
 
-                condition = "TARGET_TYPE = '" + targetType + "' and MONITOR_TYPE = '" + monitorType +
-                        (TextUtils.isEmpty(thingName) ? "" : "' and ITEMS = '" + thingName) +
-                        (TextUtils.isEmpty(thingShape) ? "" : "' and SHAPE = '" + thingShape) +
-                        "' and COLOR = '" + thingColor + "'";
+                condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
+                        (TextUtils.isEmpty(thingName) ? "" : "' and items like '" + thingName) +
+                        (TextUtils.isEmpty(thingShape) ? "" : "' and shape = '" + thingShape) +
+                        "' and color = '" + thingColor + "'";
                 break;
             default:
                 break;

@@ -15,6 +15,7 @@ import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.common.utils.ActionBarUtils;
 import com.qiu.move_examine.contract.LoginContract;
 import com.qiu.move_examine.executer.LoginWorker;
+
 import org.netty.PushClient;
 
 import com.qiu.move_examine.repertory.webservice.response.ConnectResponse;
@@ -54,7 +55,6 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         et_account = findViewById(R.id.et_account);
         et_password = findViewById(R.id.et_password);
         bt_login = findViewById(R.id.bt_login);
-        bt_login.setEnabled(false);
         bt_login.setOnClickListener(this);
         et_account.setOnFocusChangeListener(this);
         et_password.setOnFocusChangeListener(this);
@@ -93,8 +93,8 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
                             } else {
                                 findViewById(R.id.welcomeTv).setVisibility(View.GONE);
                                 findViewById(R.id.login_input).setVisibility(View.VISIBLE);
-                                bt_login.setEnabled(true);
                             }
+                            bt_login.setEnabled(true);
                         }
                     });
                 }
@@ -107,6 +107,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_login:
+                bt_login.setEnabled(false);
                 toLogin(true);
                 break;
             default:
@@ -134,6 +135,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
             et_password.requestFocus();
             return;
         }
+//        executor.loginByAccount(account,password);
         if (isShowDialog) {
             showLoading("正在登录...", new ProgressInterruptListener() {
                 @Override
@@ -143,7 +145,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
             });
             executor.connect(account, password);
         } else {
-            executor.loginByAccount(account, password);
+            executor.connect(account, password);
         }
     }
 
@@ -192,10 +194,11 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
 
     @Override
     public void loginResult(boolean isok, String msg, QueryResponse res, String account, String password) {
+        bt_login.setEnabled(true);
         if (!isok) {
             findViewById(R.id.welcomeTv).setVisibility(View.GONE);
             findViewById(R.id.login_input).setVisibility(View.VISIBLE);
-            bt_login.setEnabled(true);
+
             showTip(msg);
             hideLoading();
             return;
@@ -213,6 +216,8 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
                 SharedPreferenceUtil.saveSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD, password);
                 startActivity(new Intent(mContext, MainActivity.class));
                 finish();
+            } else if (res.getResult().getCode().equals("2")) {
+                showTip("无效的会话");
             } else {
                 showTip("登录异常，请重试");
                 hideLoading();
@@ -220,7 +225,6 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         } else {
             findViewById(R.id.welcomeTv).setVisibility(View.GONE);
             findViewById(R.id.login_input).setVisibility(View.VISIBLE);
-            bt_login.setEnabled(true);
             showTip(res.getError().getMessage());
             hideLoading();
         }

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qiu.move_examine.R;
+import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseActivity;
 import com.qiu.move_examine.common.bean.CarBean;
@@ -127,6 +128,9 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
                         break;
                 }
                 PicassoUtils.getinstance().loadImage(mContext, fieldValues.get(3).getValue(), coverIv, R.mipmap.icon_person_head);
+            } else if (res.getResult().getCode().equals("2")) {
+                showTip("会话超时");
+                AppContext.self().logout(mContext);
             } else {
                 showTip("连接异常，请重试");
                 hideLoading();

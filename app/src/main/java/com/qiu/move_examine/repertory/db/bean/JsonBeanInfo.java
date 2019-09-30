@@ -52,7 +52,7 @@ public class JsonBeanInfo extends BaseEntity {
     }
 
     public class Type {
-        public final static int AREA_LIST = 1;
+        public final static int TARGET_LIST = 1;
     }
 
     public static <T> T getBean(Long ownerId, Long jsonId, Integer type, Class<T> clazz) {

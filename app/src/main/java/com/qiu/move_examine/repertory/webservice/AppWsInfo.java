@@ -1,6 +1,7 @@
 package com.qiu.move_examine.repertory.webservice;
 
 import com.qiu.move_examine.common.base.Response;
+import com.qiu.move_examine.repertory.db.bean.JsonBeanInfo;
 import com.qiu.move_examine.repertory.webservice.service.CommonService;
 import com.satsoftec.frame.SFrame;
 import com.satsoftec.frame.repertory.remote.ResultCheck;
@@ -19,11 +20,13 @@ public class AppWsInfo extends WebServiceInfo {
     @Override
     public Class<?>[] getInterFaceClass() {
         return new Class<?>[]{
-                CommonService.class
+                CommonService.class,
+                JsonBeanInfo.class
         };
     }
 
     private static final String SERVEL_URL = "http://47.98.216.253:80/dataRequ/connAndQry";
+//    private static final String SERVEL_URL = "http://56.32.3.11:9080/drs/json-rpc";
 
     @Override
     public String getServerUrl() {

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.gson.reflect.TypeToken;
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.ClientConstant;
@@ -32,6 +33,7 @@ import com.qiu.move_examine.presenter.activity.MessageDetailsActivity;
 import com.qiu.move_examine.presenter.activity.SearchActivity;
 import com.qiu.move_examine.presenter.adapter.MessageAdapter;
 import com.qiu.move_examine.presenter.adapter.TargetAdapter;
+import com.qiu.move_examine.repertory.db.bean.JsonBeanInfo;
 import com.qiu.move_examine.repertory.webservice.response.QueryResponse;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
@@ -100,14 +102,14 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
             @Override
             public void onRefresh() {
                 page = 1;
-                loadData();
+                loadInternetData();
             }
         });
         recyclerView.setLoadMoreListener(new SwipeMenuRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
                 page++;
-                loadData();
+                loadInternetData();
             }
         });
         recyclerView.loadMoreFinish(false, true);
@@ -137,12 +139,30 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
     @Override
     protected void loadData() {
         recyclerView.loadMoreFinish(false, true);
+        loadLocalData();
+        loadInternetData();
+    }
+
+    private void loadLocalData() {
+        //加载本地数据
+        Long userId = Long.parseLong(SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID));
+
+        List<QueryResponse.ResultBean.DataBean> orderInfosList = JsonBeanInfo.getBean(userId, userId, JsonBeanInfo.Type.TARGET_LIST,
+                new TypeToken<List<QueryResponse.ResultBean.DataBean>>() {
+                }.getType());
+        if (orderInfosList != null) {
+            toLoadList(orderInfosList);
+        }
+    }
+
+    private void loadInternetData() {
         String condition = "";
         if (!TextUtils.isEmpty(keyWord)) {
-            condition = "(INVOLVE_CASE like '%" + keyWord + "%' or CHARACTER_DESCRIPTION like '%" + keyWord +
-                    "%' or BRAND = '%" + keyWord + "%' or ITEMS = '%" + keyWord + "%' or PER_NAME = '%" + keyWord
+            condition = "(involve_case like '%" + keyWord + "%' or character_description like '%" + keyWord +
+                    "%' or brand like '%" + keyWord + "%' or items like '%" + keyWord + "%' or per_name like '%" + keyWord
                     + "%')";
         }
+
         executor.loadTargetList(condition, page, PAGE_SIZE);
     }
 
@@ -176,46 +196,18 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
                 } else {
                     recyclerView.loadMoreFinish(false, true);
                 }
-                for (int i = 0; i < res.getResult().getData().size(); i++) {
-                    TargetAdapter.TargetBean tb = new TargetAdapter.TargetBean();
-                    QueryResponse.ResultBean.DataBean dataBean = res.getResult().getData().get(i);
-                    List<QueryResponse.ResultBean.DataBean.FieldValuesBean> tempBean = dataBean.getFieldValues();
-                    tb.setId(tempBean.get(0).getValue());
-                    tb.setMonitorType(tempBean.get(1).getValue());
-                    tb.setTargetType(tempBean.get(2).getValue());
-                    tb.setCover(tempBean.get(3).getValue());
-                    tb.setInvolveCase(tempBean.get(4).getValue());
-                    tb.setCharacterDescription(tempBean.get(5).getValue());
-                    tb.setPushTime(tempBean.get(6).getValue());
-                    switch (tempBean.get(2).getValue()) {
-                        case "人":
-                            PersonBean personBean = new PersonBean();
-                            personBean.setPerName(tempBean.get(7).getValue());
-                            personBean.setPerIdNo(tempBean.get(8).getValue());
-                            personBean.setPerSex(tempBean.get(9).getValue());
-                            personBean.setPerFigure(tempBean.get(10).getValue());
-                            tb.setPerson(personBean);
-                            break;
-                        case "车":
-                            CarBean carBean = new CarBean();
-                            carBean.setCarNo(tempBean.get(7).getValue());
-                            carBean.setBrand(tempBean.get(8).getValue());
-                            carBean.setColor(tempBean.get(9).getValue());
-                            tb.setCar(carBean);
-                            break;
-                        case "物":
-                            ThingsBean thingsBean = new ThingsBean();
-                            thingsBean.setItems(tempBean.get(7).getValue());
-                            thingsBean.setShape(tempBean.get(8).getValue());
-                            thingsBean.setColor(tempBean.get(9).getValue());
-                            tb.setThings(thingsBean);
-                            break;
-                        default:
-                            break;
-                    }
-                    adapter.addItem(tb);
+                List<QueryResponse.ResultBean.DataBean> data = res.getResult().getData();
+                if (page == 1) {
+                    Long userId = Long.parseLong(SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID));
+                    JsonBeanInfo.saveBean(userId, userId, JsonBeanInfo.Type.TARGET_LIST,
+                            data);
                 }
-                adapter.notifyDataSetChanged();
+
+                toLoadList(data);
+
+            } else if (res.getResult().getCode().equals("2")) {
+                mContext.showTip("会话超时");
+                AppContext.self().logout(mContext);
             } else {
                 mContext.showTip("数据请求异常，请重试");
                 hideLoading();
@@ -230,11 +222,54 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
         }
     }
 
+    private void toLoadList(List<QueryResponse.ResultBean.DataBean> data) {
+        for (int i = 0; i < data.size(); i++) {
+            TargetAdapter.TargetBean tb = new TargetAdapter.TargetBean();
+            QueryResponse.ResultBean.DataBean dataBean = data.get(i);
+            List<QueryResponse.ResultBean.DataBean.FieldValuesBean> tempBean = dataBean.getFieldValues();
+            tb.setId(tempBean.get(0).getValue());
+            tb.setMonitorType(tempBean.get(1).getValue());
+            tb.setTargetType(tempBean.get(2).getValue());
+            tb.setCover(tempBean.get(3).getValue());
+            tb.setInvolveCase(tempBean.get(4).getValue());
+            tb.setCharacterDescription(tempBean.get(5).getValue());
+            tb.setPushTime(tempBean.get(6).getValue());
+            switch (tempBean.get(2).getValue()) {
+                case "人":
+                    PersonBean personBean = new PersonBean();
+                    personBean.setPerName(tempBean.get(7).getValue());
+                    personBean.setPerIdNo(tempBean.get(8).getValue());
+                    personBean.setPerSex(tempBean.get(9).getValue());
+                    personBean.setPerFigure(tempBean.get(10).getValue());
+                    tb.setPerson(personBean);
+                    break;
+                case "车":
+                    CarBean carBean = new CarBean();
+                    carBean.setCarNo(tempBean.get(7).getValue());
+                    carBean.setBrand(tempBean.get(8).getValue());
+                    carBean.setColor(tempBean.get(9).getValue());
+                    tb.setCar(carBean);
+                    break;
+                case "物":
+                    ThingsBean thingsBean = new ThingsBean();
+                    thingsBean.setItems(tempBean.get(7).getValue());
+                    thingsBean.setShape(tempBean.get(8).getValue());
+                    thingsBean.setColor(tempBean.get(9).getValue());
+                    tb.setThings(thingsBean);
+                    break;
+                default:
+                    break;
+            }
+            adapter.addItem(tb);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
-                loadData();
+                loadInternetData();
             }
         }
     };
