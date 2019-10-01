@@ -8,11 +8,13 @@ import android.widget.RadioButton;
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.base.BaseActivity;
 import com.qiu.move_examine.common.view.GetTouchRelativeLayout;
+import com.qiu.move_examine.presenter.event.NoticeEvent;
 import com.qiu.move_examine.presenter.fragment.MessageFragment;
 import com.qiu.move_examine.presenter.fragment.PersonFragment;
 import com.qiu.move_examine.presenter.fragment.TargetFragment;
 import com.satsoftec.frame.executer.BaseExecuter;
 
+import org.greenrobot.eventbus.EventBus;
 import org.netty.PushClient;
 
 /**
@@ -126,4 +128,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         intent.setAction("com.cyapp.mynotice");
         sendBroadcast(intent);
     }
+
 }

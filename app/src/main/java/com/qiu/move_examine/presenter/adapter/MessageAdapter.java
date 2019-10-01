@@ -39,19 +39,19 @@ public class MessageAdapter extends BaseRcAdapterEx<MessageAdapter.MessageBean, 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
         MessageBean bean = getItems().get(i);
         switch (bean.getTargetType()) {
-            case "01":
+            case "人":
                 PersonBean person = bean.getPerson();
                 holder.nameTv.setText("姓名：" + person.getPerName());
                 holder.featureTv.setText("性别：" + person.getPerSex() + "  " + person.getPerFigure());
                 holder.elseTv.setText("身份证号：" + person.getPerIdNo());
                 break;
-            case "02":
+            case "车":
                 CarBean car = bean.getCar();
                 holder.nameTv.setText("品牌：" + car.getBrand());
                 holder.featureTv.setText("颜色：" + car.getColor());
                 holder.elseTv.setText("车牌号：" + car.getCarNo());
                 break;
-            case "03":
+            case "物":
                 ThingsBean things = bean.getThings();
                 holder.nameTv.setText("物品：" + things.getItems());
                 holder.featureTv.setText("颜色：" + things.getColor());

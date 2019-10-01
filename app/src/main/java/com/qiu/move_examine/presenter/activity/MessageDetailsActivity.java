@@ -107,7 +107,7 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
                         unitPhoneTv.setText("联系电话：" + fieldValues.get(13).getValue());
                         break;
                     case "车":
-                        perNumTv.setVisibility(View.VISIBLE);
+                        perNumTv.setVisibility(View.GONE);
                         nameTv.setText("品牌：" + fieldValues.get(7).getValue());
                         sexTv.setText("车牌：" + fieldValues.get(8).getValue());
                         featureTv.setText("颜色：" + fieldValues.get(9).getValue());
@@ -127,7 +127,7 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
                     default:
                         break;
                 }
-                PicassoUtils.getinstance().loadImage(mContext, fieldValues.get(3).getValue(), coverIv, R.mipmap.icon_person_head);
+                PicassoUtils.getinstance().loadImage(mContext, fieldValues.get(3).getValue(), coverIv, R.mipmap.default_image);
             } else if (res.getResult().getCode().equals("2")) {
                 showTip("会话超时");
                 AppContext.self().logout(mContext);
