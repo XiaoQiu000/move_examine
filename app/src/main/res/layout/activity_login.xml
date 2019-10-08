@@ -7,108 +7,129 @@
     android:background="@mipmap/background_login"
     tools:context=".presenter.activity.LoginActivity">
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:src="@mipmap/icon_police" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="170dp"
-        android:text="城阳移动盘查"
-        android:textColor="@color/text9"
-        android:textSize="38sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/welcomeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:text="欢迎进入\n城阳移动盘查系统"
-        android:textColor="@color/text10"
-        android:textSize="25sp"
-        android:visibility="visible" />
-
     <LinearLayout
-        android:id="@+id/login_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="55dp"
-        android:layout_marginRight="55dp"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:background="@drawable/shape_account"
-            android:orientation="horizontal">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:src="@mipmap/icon_police" />
 
-            <ImageView
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_margin="8dp"
-                android:src="@mipmap/icon_account" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="城阳移动盘查"
+            android:textColor="@color/text9"
+            android:textSize="38sp"
+            android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/et_account"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="请输入账号"
-                android:inputType="number"
-                android:maxLength="20"
-                android:maxLines="1"
-                android:textColor="@color/text6"
-                android:textColorHint="@color/text3"
-                android:textCursorDrawable="@color/background2"
-                android:textSize="15sp" />
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/welcomeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="欢迎进入\n城阳移动盘查系统"
+            android:textColor="@color/text10"
+            android:textSize="25sp"
+            android:visibility="visible" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/shape_account"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:layout_margin="8dp"
-                android:src="@mipmap/icon_password" />
-
-            <EditText
-                android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="请输入密码"
-                android:inputType="textPassword"
-                android:maxLength="16"
-                android:textColor="@color/text6"
-                android:textColorHint="@color/text3"
-                android:textCursorDrawable="@color/background2"
-                android:textSize="15sp" />
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/bt_login"
+        <LinearLayout
+            android:id="@+id/login_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/ripple_login"
-            android:text="@string/action_sign_in"
-            android:textColor="@color/text0"
-            android:textSize="16sp" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="55dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:background="@drawable/shape_account"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_margin="8dp"
+                    android:src="@mipmap/icon_account" />
+
+                <EditText
+                    android:id="@+id/et_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="请输入账号"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:textColor="@color/text6"
+                    android:textColorHint="@color/text3"
+                    android:textCursorDrawable="@color/background2"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/shape_account"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_margin="8dp"
+                    android:src="@mipmap/icon_password" />
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="请输入密码"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:textColor="@color/text6"
+                    android:textColorHint="@color/text3"
+                    android:textCursorDrawable="@color/background2"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/ripple_login"
+                android:text="@string/action_sign_in"
+                android:textColor="@color/text0"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="当前版本号版本号:1.0"
+        android:textColor="@color/white"
+        android:textSize="10sp" />
 </RelativeLayout>

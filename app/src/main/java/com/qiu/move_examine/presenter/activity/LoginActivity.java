@@ -1,11 +1,15 @@
 package com.qiu.move_examine.presenter.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.AppContext;
@@ -32,6 +36,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
     private EditText et_account, et_password;
     private Button bt_login;
     private boolean fromExtra = false;//是否退出登录过来的
+    private TextView version;
 
     @Override
     public LoginContract.LoginExecute initExecutor() {
@@ -52,6 +57,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         findViewById(R.id.b_content).setBackgroundColor(getResources().getColor(R.color.translate));
         ActionBarUtils.setTransparent(this);
 
+        version = findViewById(R.id.version);
         et_account = findViewById(R.id.et_account);
         et_password = findViewById(R.id.et_password);
         bt_login = findViewById(R.id.bt_login);
@@ -64,7 +70,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
 
     @Override
     protected void loadData() {
-
+        version.setText("当前版本号:" + getAppVersionName(this));
         String account = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT);
         String password = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD);
         if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(password)) {
@@ -230,4 +236,23 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
         }
     }
 
+    public String getAppVersionName(Context context) {
+        String versionName = "";
+        int versionCode = 0;
+        try {
+            // ---get the package info---
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            versionName = pi.versionName;
+            versionCode = pi.versionCode;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (versionName == null || versionName.length() <= 0) {
+            versionName = "";
+        }
+
+        return versionName;
+    }
 }

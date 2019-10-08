@@ -272,15 +272,20 @@
                     android:textColor="@color/text10"
                     android:textSize="18sp" />
 
-                <Spinner
-                    android:id="@+id/spinner_car_name"
+                <EditText
+                    android:id="@+id/car_name"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@null"
-                    android:gravity="center_vertical" />
+                    android:background="@drawable/shape_search2"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text0"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -298,15 +303,20 @@
                     android:textColor="@color/text10"
                     android:textSize="18sp" />
 
-                <Spinner
-                    android:id="@+id/spinner_car_color"
+                <EditText
+                    android:id="@+id/car_color"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@null"
-                    android:gravity="center_vertical" />
+                    android:background="@drawable/shape_search2"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text0"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -395,15 +405,20 @@
                     android:textColor="@color/text10"
                     android:textSize="18sp" />
 
-                <Spinner
-                    android:id="@+id/spinner_thing_color"
+                <EditText
+                    android:id="@+id/thing_color"
                     android:layout_width="match_parent"
                     android:layout_height="43dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@null"
-                    android:gravity="center_vertical" />
+                    android:background="@drawable/shape_search2"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/text0"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -437,16 +452,17 @@
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/ripple_search_bt"
+            android:text="检  索"
+            android:textColor="@color/text0"
+            android:textSize="18sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/bt_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="200dp"
-        android:background="@drawable/ripple_search_bt"
-        android:text="检  索"
-        android:textColor="@color/text0"
-        android:textSize="18sp" />
+
 </RelativeLayout>

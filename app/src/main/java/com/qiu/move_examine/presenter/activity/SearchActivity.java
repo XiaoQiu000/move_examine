@@ -25,9 +25,10 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
     private RadioGroup target_radioGroup, monitor_radioGroup;
     private RadioButton rb_person, rb_car, rb_thing, rb_arrest, rb_intercept, rb_notice;
     private LinearLayout layout_type_person, layout_type_car, layout_type_thing;
-    private EditText person_et, personNum_et, carNum_et, thingName_et, thingShape_et;
+    private EditText person_et, personNum_et, carNum_et, thingName_et, thingShape_et,
+            car_name, car_color, thing_color;
 
-    private Spinner spinner_sex, spinner_figure, spinner_car_name, spinner_car_color, spinner_thing_color;
+    private Spinner spinner_sex, spinner_figure;
     private ArrayAdapter<CharSequence> adapterSex, adapterFigure, adapterCarName, adapterCarColor, adapterThingColor;
 
     @Override
@@ -62,9 +63,9 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
 
         spinner_sex = findViewById(R.id.spinner_sex);
         spinner_figure = findViewById(R.id.spinner_figure);
-        spinner_car_name = findViewById(R.id.spinner_car_name);
-        spinner_car_color = findViewById(R.id.spinner_car_color);
-        spinner_thing_color = findViewById(R.id.spinner_thing_color);
+        car_name = findViewById(R.id.car_name);
+        car_color = findViewById(R.id.car_color);
+        thing_color = findViewById(R.id.thing_color);
 
         target_radioGroup.setOnCheckedChangeListener(this);
         rb_person.setChecked(true);
@@ -83,14 +84,8 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
         adapterThingColor.setDropDownViewResource(R.layout.spinner_dropdown);
         spinner_sex.setAdapter(adapterSex);
         spinner_figure.setAdapter(adapterFigure);
-        spinner_car_name.setAdapter(adapterCarName);
-        spinner_car_color.setAdapter(adapterCarColor);
-        spinner_thing_color.setAdapter(adapterThingColor);
         spinner_sex.setSelection(0);
         spinner_figure.setSelection(0);
-        spinner_car_name.setSelection(0);
-        spinner_car_color.setSelection(0);
-        spinner_thing_color.setSelection(0);
     }
 
     @Override
@@ -195,9 +190,14 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                 break;
             case "02":
                 String carNo = carNum_et.getText().toString();
-                String brand = ((TextView) spinner_car_name.getSelectedView().findViewById(R.id.text1)).getText().toString();
-                String carColor = ((TextView) spinner_car_color.getSelectedView().findViewById(R.id.text1)).getText().toString();
-
+                String brand = car_name.getText().toString();
+                String carColor = car_color.getText().toString();
+                if (TextUtils.isEmpty(brand)){
+                    brand = "";
+                }
+                if (TextUtils.isEmpty(carColor)){
+                    carColor = "";
+                }
                 condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
                         (TextUtils.isEmpty(carNo) ? "" : "' and car_no = '" + carNo) +
                         "' and brand like '" + brand + "%" + "' and color = '" + carColor + "'";
@@ -205,7 +205,10 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
             case "03":
                 String thingName = thingName_et.getText().toString();
                 String thingShape = thingShape_et.getText().toString();
-                String thingColor = ((TextView) spinner_thing_color.getSelectedView().findViewById(R.id.text1)).getText().toString();
+                String thingColor = thing_color.getText().toString();
+                if (TextUtils.isEmpty(thingColor)){
+                    thingColor = "";
+                }
 
                 condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
                         (TextUtils.isEmpty(thingName) ? "" : "' and items like '%" + thingName + "%") +

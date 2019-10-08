@@ -13,23 +13,38 @@
         android:background="@color/background5"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/search_et"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="35dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_search"
-            android:drawableRight="@mipmap/icon_search"
-            android:gravity="center_vertical"
-            android:hint="请输入关键字"
-            android:paddingLeft="20dp"
-            android:textColor="@color/text10"
-            android:paddingRight="15dp"
-            android:singleLine="true"
-            android:textColorHint="@color/text10"
-            android:textSize="14sp" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/search_et"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_search"
+                android:gravity="center_vertical"
+                android:hint="请输入关键字"
+                android:paddingLeft="20dp"
+                android:paddingRight="15dp"
+                android:singleLine="true"
+                android:textColor="@color/text10"
+                android:textColorHint="@color/text10"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/search_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/icon_search" />
+        </RelativeLayout>
+
 
         <Button
             android:id="@+id/search_bt"

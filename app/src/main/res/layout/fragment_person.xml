@@ -68,4 +68,5 @@
         android:text="林警官"
         android:textColor="@color/text0"
         android:textSize="18sp" />
+
 </LinearLayout>

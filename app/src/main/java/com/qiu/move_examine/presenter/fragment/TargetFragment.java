@@ -1,6 +1,7 @@
 package com.qiu.move_examine.presenter.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,6 +55,7 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
     private TargetAdapter adapter;
     private Button search_bt;
     private EditText search_et;
+    private ImageView search_img;
     private String keyWord = "";
 
     private int page = 1;
@@ -85,6 +88,7 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
 
         search_bt = headView.findViewById(R.id.search_bt);
         search_et = headView.findViewById(R.id.search_et);
+        search_img = headView.findViewById(R.id.search_img);
         search_bt.setOnClickListener(this);
         recyclerView.addHeaderView(headView);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -127,11 +131,25 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.toString().length()==0){
+                    search_img.setVisibility(View.VISIBLE);
+                }else {
+                    search_img.setVisibility(View.INVISIBLE);
+                }
                 if (mHandler.hasMessages(1)) {
                     mHandler.removeMessages(1);
                 }
                 keyWord = s.toString();
                 mHandler.sendEmptyMessageDelayed(1, 1000);
+            }
+        });
+        search_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mContext.getWindow().getDecorView().getWindowToken(), 0);
+                }
             }
         });
     }
@@ -170,6 +188,7 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search_bt:
+
                 Intent intent = new Intent(mContext, SearchActivity.class);
                 startActivity(intent);
                 break;
@@ -273,4 +292,18 @@ public class TargetFragment extends BaseFragment<TargetContract.TargetExecute> i
             }
         }
     };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        hideInput();
+    }
+
+    private void hideInput() {
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mContext.getWindow().getDecorView().getWindowToken(), 0);
+
+        findView(R.id.title).setFocusableInTouchMode(true);
+        findView(R.id.title).requestFocus();
+    }
 }
