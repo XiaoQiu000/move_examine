@@ -1,8 +1,11 @@
 package com.qiu.move_examine.presenter.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +86,10 @@ public class TargetAdapter extends BaseRcAdapterEx<TargetAdapter.TargetBean, Tar
             default:
                 break;
         }
-        PicassoUtils.getinstance().loadImage(context, bean.getCover(), holder.coverIv, R.mipmap.default_image);
+        byte [] input = Base64.decode(bean.getCover(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(input, 0, input.length);
+        holder.coverIv.setImageBitmap(bitmap);
+//        PicassoUtils.getinstance().loadImage(context, bean.getCover(), holder.coverIv, R.mipmap.default_image);
         holder.involveCaseTv.setText(bean.getInvolveCase() == null ? "" : bean.getInvolveCase());
         holder.descriptionTv.setText("特征描述：" + (bean.getCharacterDescription() == null ? "" : bean.getCharacterDescription()));
         holder.timeTv.setText(bean.getPushTime() == null ? "" : bean.getPushTime());

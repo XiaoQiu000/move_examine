@@ -2,9 +2,12 @@ package com.qiu.move_examine.presenter.fragment;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -78,8 +81,11 @@ public class PersonFragment extends BaseFragment {
         String cover = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_COVER);
         tv_inspectionUnit.setText(isp);
         tv_perName.setText(perName);
-        PicassoUtils.getinstance().loadImage(mContext, cover, iv_head,
-                R.mipmap.icon_person_head);
+//        byte [] input = Base64.decode(cover, Base64.DEFAULT);
+//        Bitmap bitmap = BitmapFactory.decodeByteArray(input, 0, input.length);
+//        iv_head.setImageBitmap(bitmap);
+//        PicassoUtils.getinstance().loadImage(mContext, cover, iv_head,
+////                R.mipmap.icon_person_head);
     }
 
     @Override

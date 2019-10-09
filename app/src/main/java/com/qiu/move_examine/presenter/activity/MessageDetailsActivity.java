@@ -1,8 +1,11 @@
 package com.qiu.move_examine.presenter.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -127,7 +130,10 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
                     default:
                         break;
                 }
-                PicassoUtils.getinstance().loadImage(mContext, fieldValues.get(3).getValue(), coverIv, R.mipmap.default_image);
+                byte [] input = Base64.decode(fieldValues.get(3).getValue(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(input, 0, input.length);
+                coverIv.setImageBitmap(bitmap);
+//                PicassoUtils.getinstance().loadImage(mContext, fieldValues.get(3).getValue(), coverIv, R.mipmap.default_image);
             } else if (res.getResult().getCode().equals("2")) {
                 showTip("会话超时");
                 AppContext.self().logout(mContext);
