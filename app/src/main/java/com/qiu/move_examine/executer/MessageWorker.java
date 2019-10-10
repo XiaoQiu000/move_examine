@@ -9,6 +9,7 @@ import com.qiu.move_examine.repertory.db.bean.NoticeInfo;
 import com.satsoftec.frame.repertory.dbTool.DatabaseManage;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,5 +39,18 @@ public class MessageWorker implements MessageContract.MessageExecute {
         String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
         DatabaseManage.delete(NoticeInfo.class, "ownerId=" + userId);
         presenter.deleteNoticeResult();
+    }
+
+    @Override
+    public void loadNoReadCount() {
+//        List<NoticeInfo> list;
+//        Log.e(TAG, "loadNotice: " + AppContext.self());
+//        String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
+//        list = DatabaseManage.getList(NoticeInfo.class, "ownerId=" + userId + " and noticeHaveRead = false");
+//        if (list != null) {
+//            presenter.noReadCountResult(list);
+//        } else {
+//            presenter.noReadCountResult(new ArrayList<NoticeInfo>());
+//        }
     }
 }

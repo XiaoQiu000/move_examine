@@ -133,6 +133,11 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
     }
 
     @Override
+    public void noReadCountResult(List<NoticeInfo> list) {
+
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);

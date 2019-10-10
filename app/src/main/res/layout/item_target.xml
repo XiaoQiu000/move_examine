@@ -15,6 +15,7 @@
         <ImageView
             android:id="@+id/coverIv"
             android:layout_width="88dp"
+            android:scaleType="centerCrop"
             android:layout_height="88dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="13dp"

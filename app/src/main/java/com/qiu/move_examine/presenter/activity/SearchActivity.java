@@ -192,28 +192,21 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                 String carNo = carNum_et.getText().toString();
                 String brand = car_name.getText().toString();
                 String carColor = car_color.getText().toString();
-                if (TextUtils.isEmpty(brand)){
-                    brand = "";
-                }
-                if (TextUtils.isEmpty(carColor)){
-                    carColor = "";
-                }
+
                 condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
                         (TextUtils.isEmpty(carNo) ? "" : "' and car_no = '" + carNo) +
-                        "' and brand like '" + brand + "%" + "' and color = '" + carColor + "'";
+                        (TextUtils.isEmpty(brand) ? "" : "' and brand like '%" + brand + "%") +
+                        (TextUtils.isEmpty(carColor) ? "" : "' and color = '" + carColor) + "'";
                 break;
             case "03":
                 String thingName = thingName_et.getText().toString();
                 String thingShape = thingShape_et.getText().toString();
                 String thingColor = thing_color.getText().toString();
-                if (TextUtils.isEmpty(thingColor)){
-                    thingColor = "";
-                }
 
                 condition = "target_type = '" + targetType + "' and monitor_type = '" + monitorType +
                         (TextUtils.isEmpty(thingName) ? "" : "' and items like '%" + thingName + "%") +
                         (TextUtils.isEmpty(thingShape) ? "" : "' and shape = '" + thingShape) +
-                        "' and color = '" + thingColor + "'";
+                        (TextUtils.isEmpty(thingColor) ? "" : "' and color = '" + thingColor) + "'";
                 break;
             default:
                 break;

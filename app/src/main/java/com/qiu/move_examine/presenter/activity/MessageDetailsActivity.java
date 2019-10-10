@@ -2,6 +2,8 @@ package com.qiu.move_examine.presenter.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -69,11 +71,31 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
 
     @Override
     protected void loadData() {
+        hasReceive = false;
         executor.loadDetails(mId);
+        uiHandle.sendEmptyMessageDelayed(1, 5000);
     }
+
+    private boolean hasReceive = false;
+    private Handler uiHandle = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                //实现计时器功能
+                case 1:
+                    if (!hasReceive){
+                        loadData();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     public void detailsResult(boolean isok, String msg, QueryResponse res) {
+        hasReceive = true;
         if (!isok) {
             showTip(msg);
             hideLoading();
@@ -130,7 +152,7 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
                     default:
                         break;
                 }
-                byte [] input = Base64.decode(fieldValues.get(3).getValue(), Base64.DEFAULT);
+                byte[] input = Base64.decode(fieldValues.get(3).getValue(), Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(input, 0, input.length);
                 coverIv.setImageBitmap(bitmap);
 //                PicassoUtils.getinstance().loadImage(mContext, fieldValues.get(3).getValue(), coverIv, R.mipmap.default_image);
@@ -145,5 +167,11 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
             showTip(res.getError().getMessage());
             hideLoading();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        uiHandle.removeMessages(1);
     }
 }

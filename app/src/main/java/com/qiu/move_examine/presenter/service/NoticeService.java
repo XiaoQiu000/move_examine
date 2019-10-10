@@ -64,73 +64,76 @@ public class NoticeService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(time);
-                    WebServiceManage.getService(CommonService.class).pushList().setCallback(new SCallBack<QueryResponse>() {
-                        @Override
-                        public void callback(boolean isok, String msg, QueryResponse res) {
-                            if (!isok) {
-                                return;
-                            }
-                            if (res.getResult() != null) {
-                                if (res.getResult().getCode().equals("1")) {
-                                    Log.e("NoticeService", "run: 获取推送消息成功");
-                                    for (int i = 0; i < res.getResult().getData().size(); i++) {
-                                        NoticeInfo noticeInfo = new NoticeInfo();
-                                        QueryResponse.ResultBean.DataBean dataBean = res.getResult().getData().get(i);
-                                        List<QueryResponse.ResultBean.DataBean.FieldValuesBean> tempBean = dataBean.getFieldValues();
-                                        String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
-                                        noticeInfo.setOwnerId(userId);
-                                        noticeInfo.setNoticeId(Integer.parseInt(tempBean.get(0).getValue()));
-                                        noticeInfo.setMonitorType(tempBean.get(1).getValue());
-                                        noticeInfo.setTargetType(tempBean.get(2).getValue());
-                                        noticeInfo.setCover(tempBean.get(3).getValue());
-                                        noticeInfo.setPushTime(tempBean.get(6).getValue());
-                                        switch (tempBean.get(2).getValue()) {
-                                            case "人":
-                                                PersonBean personBean = new PersonBean();
-                                                personBean.setPerName(tempBean.get(7).getValue());
-                                                personBean.setPerIdNo(tempBean.get(8).getValue());
-                                                personBean.setPerSex(tempBean.get(9).getValue());
-                                                personBean.setPerFigure(tempBean.get(10).getValue());
-                                                noticeInfo.setPerson(SFrame.getGson().toJson(personBean));
-                                                break;
-                                            case "车":
-                                                CarBean carBean = new CarBean();
-                                                carBean.setCarNo(tempBean.get(7).getValue());
-                                                carBean.setBrand(tempBean.get(8).getValue());
-                                                carBean.setColor(tempBean.get(9).getValue());
-                                                noticeInfo.setCar(SFrame.getGson().toJson(carBean));
-                                                break;
-                                            case "物":
-                                                ThingsBean thingsBean = new ThingsBean();
-                                                thingsBean.setItems(tempBean.get(7).getValue());
-                                                thingsBean.setShape(tempBean.get(8).getValue());
-                                                thingsBean.setColor(tempBean.get(9).getValue());
-                                                noticeInfo.setThings(SFrame.getGson().toJson(thingsBean));
-                                                break;
-                                            default:
-                                                break;
+                while (true){
+                    try {
+                        Thread.sleep(time);
+                        WebServiceManage.getService(CommonService.class).pushList().setCallback(new SCallBack<QueryResponse>() {
+                            @Override
+                            public void callback(boolean isok, String msg, QueryResponse res) {
+                                if (!isok) {
+                                    return;
+                                }
+                                if (res.getResult() != null) {
+                                    if (res.getResult().getCode().equals("1")) {
+                                        Log.e("NoticeService", "run: 获取推送消息成功");
+                                        for (int i = 0; i < res.getResult().getData().size(); i++) {
+                                            NoticeInfo noticeInfo = new NoticeInfo();
+                                            QueryResponse.ResultBean.DataBean dataBean = res.getResult().getData().get(i);
+                                            List<QueryResponse.ResultBean.DataBean.FieldValuesBean> tempBean = dataBean.getFieldValues();
+                                            String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
+                                            noticeInfo.setOwnerId(userId);
+                                            noticeInfo.setNoticeId(Integer.parseInt(tempBean.get(0).getValue()));
+                                            noticeInfo.setMonitorType(tempBean.get(1).getValue());
+                                            noticeInfo.setTargetType(tempBean.get(2).getValue());
+                                            noticeInfo.setCover(tempBean.get(3).getValue());
+                                            noticeInfo.setPushTime(tempBean.get(6).getValue());
+                                            switch (tempBean.get(2).getValue()) {
+                                                case "人":
+                                                    PersonBean personBean = new PersonBean();
+                                                    personBean.setPerName(tempBean.get(7).getValue());
+                                                    personBean.setPerIdNo(tempBean.get(8).getValue());
+                                                    personBean.setPerSex(tempBean.get(9).getValue());
+                                                    personBean.setPerFigure(tempBean.get(10).getValue());
+                                                    noticeInfo.setPerson(SFrame.getGson().toJson(personBean));
+                                                    break;
+                                                case "车":
+                                                    CarBean carBean = new CarBean();
+                                                    carBean.setCarNo(tempBean.get(7).getValue());
+                                                    carBean.setBrand(tempBean.get(8).getValue());
+                                                    carBean.setColor(tempBean.get(9).getValue());
+                                                    noticeInfo.setCar(SFrame.getGson().toJson(carBean));
+                                                    break;
+                                                case "物":
+                                                    ThingsBean thingsBean = new ThingsBean();
+                                                    thingsBean.setItems(tempBean.get(7).getValue());
+                                                    thingsBean.setShape(tempBean.get(8).getValue());
+                                                    thingsBean.setColor(tempBean.get(9).getValue());
+                                                    noticeInfo.setThings(SFrame.getGson().toJson(thingsBean));
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                            noticeInfo.setNoticeHaveRead(false);
+                                            DatabaseManage.insert(noticeInfo);
+                                            EventBus.getDefault().post(new NoticeEvent());
+                                            notification(AppContext.self().getApplication(), tempBean.get(4).getValue(), tempBean.get(5).getValue(), Integer.parseInt(tempBean.get(0).getValue()));
                                         }
-                                        noticeInfo.setNoticeHaveRead(false);
-                                        DatabaseManage.insert(noticeInfo);
-                                        EventBus.getDefault().post(new NoticeEvent());
-                                        notification(AppContext.self().getApplication(), tempBean.get(4).getValue(), tempBean.get(5).getValue(), Integer.parseInt(tempBean.get(0).getValue()));
                                     }
                                 }
                             }
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+
             }
         }).start();
-        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long triggerAtTime = SystemClock.elapsedRealtime() + time;
-        Intent intent2 = new Intent(this, NoticeReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent2, 0);
-        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
+//        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        long triggerAtTime = SystemClock.elapsedRealtime() + time;
+//        Intent intent2 = new Intent(this, NoticeReceiver.class);
+//        PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent2, 0);
+//        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
         return super.onStartCommand(intent, flags, startId);
     }
 

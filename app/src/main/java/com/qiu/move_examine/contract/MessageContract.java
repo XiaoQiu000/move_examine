@@ -14,11 +14,15 @@ public class MessageContract {
         void loadNotice();
 
         void loadDeleteNotice();
+
+        void loadNoReadCount();
     }
 
     public interface MessagePresenter extends BasePresenter<MessageExecute> {
         void noticeResult(List<NoticeInfo> list);
 
         void deleteNoticeResult();
+
+        void noReadCountResult(List<NoticeInfo> list);
     }
 }
