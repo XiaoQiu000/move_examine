@@ -3,14 +3,12 @@ package com.qiu.move_examine.presenter.fragment;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.Person;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.qiu.move_examine.R;
-import com.qiu.move_examine.common.AppContext;
 import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseFragment;
 import com.qiu.move_examine.common.bean.CarBean;
@@ -33,8 +31,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
-
-import static android.support.constraint.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,8 +81,9 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
                 String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
                 MessageAdapter.MessageBean messageBean = adapter.getItems().get(position);
                 NoticeInfo noticeInfo = DatabaseManage.getBean(NoticeInfo.class, "ownerId = '" + userId + "' and noticeId = " + messageBean.getId());
-                noticeInfo.setNoticeHaveRead(true);
+                noticeInfo.setNoticeHaveRead(1);
                 DatabaseManage.update(noticeInfo, "ownerId = '" + userId + "' and noticeId=" + messageBean.getId());
+                executor.loadNoReadCount();
                 adapter.getItems().get(position).setRead(true);
                 adapter.notifyItemChanged(position);
                 Intent intent = new Intent(mContext, MessageDetailsActivity.class);
@@ -99,6 +96,7 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
     @Override
     protected void loadData() {
         executor.loadNotice();
+        executor.loadNoReadCount();
     }
 
     @Override
@@ -115,7 +113,7 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
             mBean.setPerson(SFrame.getGson().fromJson(noticeInfo.getPerson(), PersonBean.class));
             mBean.setCar(SFrame.getGson().fromJson(noticeInfo.getCar(), CarBean.class));
             mBean.setThings(SFrame.getGson().fromJson(noticeInfo.getThings(), ThingsBean.class));
-            mBean.setRead(noticeInfo.getNoticeHaveRead());
+            mBean.setRead(noticeInfo.getNoticeHaveRead() == 0 ? false : true);
             adapter.addItem(mBean);
         }
         adapter.notifyDataSetChanged();
@@ -133,8 +131,14 @@ public class MessageFragment extends BaseFragment<MessageContract.MessageExecute
     }
 
     @Override
-    public void noReadCountResult(List<NoticeInfo> list) {
+    public void noReadCountResult(int count) {
+        if (count == 0) {
+            mContext.findViewById(R.id.unread_layout).setVisibility(View.GONE);
 
+        } else {
+            mContext.findViewById(R.id.unread_layout).setVisibility(View.VISIBLE);
+            ((TextView) mContext.findViewById(R.id.unread_num)).setText(count + "");
+        }
     }
 
     @Override

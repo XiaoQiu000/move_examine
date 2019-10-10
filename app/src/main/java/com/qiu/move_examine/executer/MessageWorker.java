@@ -43,14 +43,13 @@ public class MessageWorker implements MessageContract.MessageExecute {
 
     @Override
     public void loadNoReadCount() {
-//        List<NoticeInfo> list;
-//        Log.e(TAG, "loadNotice: " + AppContext.self());
-//        String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
-//        list = DatabaseManage.getList(NoticeInfo.class, "ownerId=" + userId + " and noticeHaveRead = false");
-//        if (list != null) {
-//            presenter.noReadCountResult(list);
-//        } else {
-//            presenter.noReadCountResult(new ArrayList<NoticeInfo>());
-//        }
+        List<NoticeInfo> list;
+        String userId = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ID);
+        list = DatabaseManage.getList(NoticeInfo.class, "ownerId=" + userId + " and noticeHaveRead = 0");
+        if (list != null) {
+            presenter.noReadCountResult(list.size());
+        }else {
+            presenter.noReadCountResult(0);
+        }
     }
 }

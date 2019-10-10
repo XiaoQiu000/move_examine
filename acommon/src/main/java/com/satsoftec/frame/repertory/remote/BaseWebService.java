@@ -62,7 +62,7 @@ public class BaseWebService {
 
     public RequestParams getRequestParams(String url) {
         RequestParams requestParams = new RequestParams(url);
-        requestParams.setConnectTimeout(20000);
+        requestParams.setConnectTimeout(10000);
         return requestParams;
     }
 

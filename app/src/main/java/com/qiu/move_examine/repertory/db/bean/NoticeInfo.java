@@ -80,7 +80,7 @@ public class NoticeInfo extends BaseEntity {
         this.things = things;
     }
 
-    private Boolean noticeHaveRead;
+    private int noticeHaveRead;//0是未读 1是已读
 
     public String getOwnerId() {
         return ownerId;
@@ -98,14 +98,11 @@ public class NoticeInfo extends BaseEntity {
         this.noticeId = noticeId;
     }
 
-    public Boolean getNoticeHaveRead() {
-        if (noticeHaveRead == null) {
-            return false;
-        }
+    public int getNoticeHaveRead() {
         return noticeHaveRead;
     }
 
-    public void setNoticeHaveRead(Boolean noticeHaveRead) {
+    public void setNoticeHaveRead(int noticeHaveRead) {
         this.noticeHaveRead = noticeHaveRead;
     }
 }

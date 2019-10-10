@@ -23,6 +23,6 @@ public class MessageContract {
 
         void deleteNoticeResult();
 
-        void noReadCountResult(List<NoticeInfo> list);
+        void noReadCountResult(int count);
     }
 }

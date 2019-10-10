@@ -22,7 +22,7 @@ public class AppDbInfo extends DatabaseInfo {
 
     @Override
     public int getDbVersion() {
-        return 1;
+        return 2;
     }
 
     @Override

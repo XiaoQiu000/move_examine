@@ -113,7 +113,7 @@ public class NoticeService extends Service {
                                                 default:
                                                     break;
                                             }
-                                            noticeInfo.setNoticeHaveRead(false);
+                                            noticeInfo.setNoticeHaveRead(0);
                                             DatabaseManage.insert(noticeInfo);
                                             EventBus.getDefault().post(new NoticeEvent());
                                             notification(AppContext.self().getApplication(), tempBean.get(4).getValue(), tempBean.get(5).getValue(), Integer.parseInt(tempBean.get(0).getValue()));
