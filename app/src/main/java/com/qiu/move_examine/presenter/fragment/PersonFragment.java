@@ -20,8 +20,11 @@ import com.qiu.move_examine.common.ClientConstant;
 import com.qiu.move_examine.common.base.BaseFragment;
 import com.qiu.move_examine.common.bean.UserInfoBean;
 import com.qiu.move_examine.common.utils.PicassoUtils;
+
 import org.netty.PushClient;
+
 import com.qiu.move_examine.presenter.activity.LoginActivity;
+import com.qiu.move_examine.presenter.activity.SystemInfoActivity;
 import com.satsoftec.frame.executer.BaseExecuter;
 import com.satsoftec.frame.util.SharedPreferenceUtil;
 
@@ -67,6 +70,9 @@ public class PersonFragment extends BaseFragment {
                 switch (menuItem.getItemId()) {
                     case R.id.exitLogin:
                         AppContext.self().logout(mContext);
+                        break;
+                    case R.id.systemInfo:
+                        startActivity(new Intent(mContext, SystemInfoActivity.class));
                         break;
                 }
                 return false;

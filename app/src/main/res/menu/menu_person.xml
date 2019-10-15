@@ -5,5 +5,8 @@
         android:id="@+id/exitLogin"
         android:title="退出登录"
         app:showAsAction="never" />
-
+    <item
+        android:id="@+id/systemInfo"
+        android:title="系统信息"
+        app:showAsAction="never" />
 </menu>

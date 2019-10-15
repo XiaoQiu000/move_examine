@@ -83,7 +83,7 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
             switch (msg.what) {
                 //实现计时器功能
                 case 1:
-                    if (!hasReceive){
+                    if (!hasReceive) {
                         loadData();
                     }
                     break;
@@ -103,7 +103,13 @@ public class MessageDetailsActivity extends BaseActivity<DetailsContract.Details
         }
         if (res.getResult() != null) {
             if (res.getResult().getCode().equals("1")) {
+                if (res.getResult().getData().size() == 0) {
+                    showTip("数据不存在！");
+                    finish();
+                    return;
+                }
                 List<QueryResponse.ResultBean.DataBean.FieldValuesBean> fieldValues = res.getResult().getData().get(0).getFieldValues();
+
                 involveCaseTv.setText("涉及案件：" + fieldValues.get(4).getValue());
                 descriptionTv.setText("异常特征描述：" + fieldValues.get(5).getValue());
                 stateTv.setText(fieldValues.get(1).getValue());

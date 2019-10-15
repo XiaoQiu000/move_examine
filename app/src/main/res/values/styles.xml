@@ -40,8 +40,8 @@
 
     <!-- 分隔线 -->
     <style name="PopupMenuListView" parent="@android:style/Widget.Holo.ListView.DropDown">
-        <item name="android:divider">#ffffff</item>
-        <item name="android:dividerHeight">2dp</item>
+        <item name="android:divider">#666666</item>
+        <item name="android:dividerHeight">0.5dp</item>
     </style>
 
     <!-- Menu item 文字样式  对应item的large或者small 选择parent 否则无效-->
