@@ -45,9 +45,9 @@
                     android:layout_weight="1" />
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <RelativeLayout
                         android:id="@+id/unread_layout"
@@ -92,6 +92,27 @@
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:text="目标库"
+                android:textColor="@drawable/textchane"
+                android:textSize="12sp" />
+
+        </com.qiu.move_examine.common.view.GetTouchRelativeLayout>
+
+        <com.qiu.move_examine.common.view.GetTouchRelativeLayout
+            android:id="@+id/apply_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/apply_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:button="@null"
+                android:drawableTop="@drawable/rb_apply"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:text="我的应用"
                 android:textColor="@drawable/textchane"
                 android:textSize="12sp" />
 

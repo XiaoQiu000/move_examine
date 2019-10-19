@@ -25,9 +25,9 @@ public class AppWsInfo extends WebServiceInfo {
         };
     }
 
-//        private static final String SERVEL_URL = "http://47.98.216.253:80/dataRequ/connAndQry";//外网测试
+        private static final String SERVEL_URL = "http://47.98.216.253:80/dataRequ/connAndQry";//外网测试
 //    private static final String SERVEL_URL = "http://56.32.3.11:9080/drs/json-rpc";
-    private static final String SERVEL_URL = "http://20.11.67.38:9080/drs/json-rpc";//公安正式网
+//    private static final String SERVEL_URL = "http://20.11.67.38:9080/drs/json-rpc";//公安正式网
     @Override
     public String getServerUrl() {
         return SERVEL_URL;

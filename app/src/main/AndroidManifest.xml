@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.activity.SystemInfoActivity"></activity>
+        <activity android:name=".presenter.activity.ApplyHeadActivity"></activity>
+        <activity android:name=".presenter.activity.ApplyIdentityActivity"></activity>
+        <activity android:name=".presenter.activity.ApplyAlarmActivity"></activity>
+        <activity android:name=".presenter.activity.SystemInfoActivity" />
         <activity android:name=".presenter.activity.SearchResultActivity" />
         <activity android:name=".presenter.activity.WelcomeActivity" />
         <activity android:name=".presenter.activity.SearchActivity" />

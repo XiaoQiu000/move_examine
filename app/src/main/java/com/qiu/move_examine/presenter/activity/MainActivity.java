@@ -9,6 +9,7 @@ import com.qiu.move_examine.R;
 import com.qiu.move_examine.common.base.BaseActivity;
 import com.qiu.move_examine.common.view.GetTouchRelativeLayout;
 import com.qiu.move_examine.presenter.event.NoticeEvent;
+import com.qiu.move_examine.presenter.fragment.ApplyFragment;
 import com.qiu.move_examine.presenter.fragment.MessageFragment;
 import com.qiu.move_examine.presenter.fragment.PersonFragment;
 import com.qiu.move_examine.presenter.fragment.TargetFragment;
@@ -21,11 +22,12 @@ import org.netty.PushClient;
  * @author Mr.Qiu
  */
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-    private RadioButton rb_message, rb_target, rb_person;
-    private GetTouchRelativeLayout message_layout, targetLayout, personLayout;
+    private RadioButton rb_message, rb_target, rb_person,rb_apply;
+    private GetTouchRelativeLayout message_layout, targetLayout, personLayout,applyLayout;
     private MessageFragment messageFragment;
     private TargetFragment targetFragment;
     private PersonFragment personFragment;
+    private ApplyFragment applyFragment;
     private Fragment preFragment;
 
     @Override
@@ -44,23 +46,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         messageFragment = new MessageFragment();
         targetFragment = new TargetFragment();
         personFragment = new PersonFragment();
+        applyFragment = new ApplyFragment();
 
         rb_message = findViewById(R.id.message_rb);
         rb_target = findViewById(R.id.target_rb);
         rb_person = findViewById(R.id.person_rb);
+        rb_apply = findViewById(R.id.apply_rb);
         message_layout = findViewById(R.id.message_layout);
         targetLayout = findViewById(R.id.target_layout);
         personLayout = findViewById(R.id.person_layout);
+        applyLayout = findViewById(R.id.apply_layout);
 
         rb_message.setOnClickListener(this);
         rb_target.setOnClickListener(this);
         rb_person.setOnClickListener(this);
+        rb_apply.setOnClickListener(this);
         message_layout.setOnClickListener(this);
         targetLayout.setOnClickListener(this);
         personLayout.setOnClickListener(this);
+        applyLayout.setOnClickListener(this);
 
         rb_message.setChecked(true);
         rb_target.setChecked(false);
+        rb_apply.setChecked(false);
         rb_person.setChecked(false);
 
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame, messageFragment).commit();
@@ -75,6 +83,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.message_layout:
                 rb_message.setChecked(true);
                 rb_target.setChecked(false);
+                rb_apply.setChecked(false);
                 rb_person.setChecked(false);
                 if (messageFragment.isVisible()) {
                     return;
@@ -89,6 +98,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.target_layout:
                 rb_message.setChecked(false);
                 rb_target.setChecked(true);
+                rb_apply.setChecked(false);
                 rb_person.setChecked(false);
                 if (targetFragment.isVisible()) {
                     return;
@@ -100,10 +110,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
                 preFragment = targetFragment;
                 break;
-
+            case R.id.apply_layout:
+                rb_message.setChecked(false);
+                rb_target.setChecked(false);
+                rb_apply.setChecked(true);
+                rb_person.setChecked(false);
+                if (applyFragment.isVisible()) {
+                    return;
+                }
+                if (applyFragment != null && applyFragment.isAdded()) {
+                    getSupportFragmentManager().beginTransaction().show(applyFragment).hide(preFragment).commit();
+                } else {
+                    getSupportFragmentManager().beginTransaction().add(R.id.main_frame, applyFragment).hide(preFragment).commit();
+                }
+                preFragment = applyFragment;
+                break;
             case R.id.person_layout:
                 rb_message.setChecked(false);
                 rb_target.setChecked(false);
+                rb_apply.setChecked(false);
                 rb_person.setChecked(true);
                 if (personFragment.isVisible()) {
                     return;
