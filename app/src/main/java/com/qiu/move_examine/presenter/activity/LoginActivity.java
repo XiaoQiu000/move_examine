@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
 
     @Override
     protected void loadData() {
-        version.setText("当前版本号:" + getAppVersionName(this));
+        version.setText("当前版本号:V" + getAppVersionName(this));
         String account = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_ACCOUNT);
         String password = SharedPreferenceUtil.getSharedPreString(ClientConstant.SPREFERENCES_LOGIN_PASSWORD);
         if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(password)) {
@@ -81,8 +81,15 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
             @Override
             public void run() {
                 if (fromExtra) {
-                    findViewById(R.id.welcomeTv).setVisibility(View.GONE);
-                    findViewById(R.id.login_input).setVisibility(View.VISIBLE);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            findViewById(R.id.welcomeTv).setVisibility(View.GONE);
+                            findViewById(R.id.login_input).setVisibility(View.VISIBLE);
+                            bt_login.setEnabled(true);
+                        }
+                    });
+
                 } else {
                     try {
                         Thread.sleep(1500);
@@ -179,6 +186,7 @@ public class LoginActivity extends BaseActivity<LoginContract.LoginExecute> impl
 
     @Override
     public void connectResult(boolean isok, String msg, ConnectResponse res, String account, String password) {
+        bt_login.setEnabled(true);
         if (!isok) {
             showTip(msg);
             hideLoading();

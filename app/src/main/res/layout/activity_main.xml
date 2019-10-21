@@ -112,7 +112,7 @@
                 android:drawableTop="@drawable/rb_apply"
                 android:gravity="center"
                 android:paddingTop="8dp"
-                android:text="我的应用"
+                android:text="应用中心"
                 android:textColor="@drawable/textchane"
                 android:textSize="12sp" />
 
@@ -132,7 +132,7 @@
                 android:drawableTop="@drawable/rb_person"
                 android:gravity="center"
                 android:paddingTop="8dp"
-                android:text="我的"
+                android:text="个人中心"
                 android:textColor="@drawable/textchane"
                 android:textSize="12sp" />
         </com.qiu.move_examine.common.view.GetTouchRelativeLayout>
